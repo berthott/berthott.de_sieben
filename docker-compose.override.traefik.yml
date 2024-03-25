@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  pma:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.berthott-pma.rule=Host(`pma.berthott.de`)
+      - traefik.http.routers.berthott-pma.tls=true
+      - traefik.http.routers.berthott-pma.tls.certresolver=lets-encrypt
+      - traefik.http.routers.berthott-pma.middlewares=basic-auth@file
+
+  directus:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.directus.rule=Host(`admin.berthott.de`)
+      - traefik.http.routers.directus.tls=true
+      - traefik.http.routers.directus.tls.certresolver=lets-encrypt
+      - traefik.http.routers.directus.middlewares=basic-auth@file
+
+  berthott:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.berthott.rule=Host(`www.berthott.de`) || Host(`berthott.de`)
+      - traefik.http.routers.berthott.tls=true
+      - traefik.http.routers.berthott.tls.certresolver=lets-encrypt
