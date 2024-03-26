@@ -1,0 +1,15 @@
+.nav {
+  @apply 
+    fixed
+    w-full
+    bg-white
+    flex
+    justify-between
+    items-center
+    px-4
+    md:px-12
+    transition-all
+    duration-200
+    h-24
+    z-50;
+}
