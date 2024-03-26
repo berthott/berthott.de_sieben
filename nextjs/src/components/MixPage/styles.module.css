@@ -1,0 +1,21 @@
+.page {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  
+  @apply 
+    relative
+    w-full
+    h-dvh
+    border-10
+    border-white;
+  
+  .img {
+    @apply 
+      absolute
+      top-0
+      left-0
+      w-full
+      h-full
+      object-cover;
+  }
+}
