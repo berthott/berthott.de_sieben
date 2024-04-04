@@ -1,0 +1,8 @@
+.mix {
+  @apply
+    bg-white
+    p-2
+    absolute
+    cursor-move
+    z-50;
+}

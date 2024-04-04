@@ -2,14 +2,11 @@
   @apply 
     fixed
     w-full
-    bg-white
     flex
-    justify-between
+    flex-row-reverse
     items-center
     px-4
     md:px-12
-    transition-all
-    duration-200
     h-24
-    z-50;
+    z-10;
 }

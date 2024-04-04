@@ -1,6 +1,6 @@
 .page {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  /* scroll-snap-align: start;
+  scroll-snap-stop: always; */
   
   @apply 
     relative
