@@ -8,7 +8,7 @@ type MixPageProps = PropsWithChildren<{
 
 export default function MixPage({ id }: MixPageProps) {
   return (
-    <section className={styles.page}>
+    <section className={styles.page} id={id}>
       <Image className={styles.img} src={`/images/${id}.jpg`} alt={id} fill></Image>
     </section>
   );

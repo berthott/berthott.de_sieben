@@ -31,7 +31,7 @@ export default function Menu() {
   return menu.show && documentRef.current && createPortal((
     <div className={styles.menu}>
       <div className={styles.menu__list}>
-        <button onClick={() => menu.setShow(!menu.show)}>
+        <button onClick={() => menu.setShow(false)}>
           <CloseIcon style={{fontSize: 60}}/>
         </button>
         <button>
@@ -57,7 +57,6 @@ export default function Menu() {
             setZIndex(zIndex + 1);
             item.node.style.zIndex = zIndex.toString();
            }}>
-  
           <MenuItem id={key} title={data.text}></MenuItem>
         </Rnd>
       );
