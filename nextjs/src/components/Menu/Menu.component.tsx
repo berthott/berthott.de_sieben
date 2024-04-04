@@ -4,11 +4,12 @@ import styles from '@components/Menu/Menu.module.css';
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import WindowIcon from '@mui/icons-material/Window';
 import CloseIcon from '@mui/icons-material/Close';
-import { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { dummy_data } from '@app/dummy_data';
 import { MenuItem } from './MenuItem';
 import { Rnd } from 'react-rnd';
 import { createPortal } from 'react-dom';
+import { MenuContext } from './Menu.state';
 
 enum MenuStyle {
   Layer,
@@ -16,12 +17,8 @@ enum MenuStyle {
   List,
 }
 
-type MenuProps = PropsWithChildren<{
-  show?: boolean;
-  onClose?: () => void;
-}>;
 
-export default function Menu({ show = false, onClose }: MenuProps) {
+export default function Menu() {
   const documentRef = useRef<Element | null>(null);
   useEffect(() => {
     documentRef.current = document.body;
@@ -29,10 +26,12 @@ export default function Menu({ show = false, onClose }: MenuProps) {
 
   const [zIndex, setZIndex] = useState<number>(31);
 
-  return show && documentRef.current && createPortal((
+  const menu = useContext(MenuContext);
+
+  return menu.show && documentRef.current && createPortal((
     <div className={styles.menu}>
       <div className={styles.menu__list}>
-        <button onClick={onClose}>
+        <button onClick={() => menu.setShow(!menu.show)}>
           <CloseIcon style={{fontSize: 60}}/>
         </button>
         <button>
