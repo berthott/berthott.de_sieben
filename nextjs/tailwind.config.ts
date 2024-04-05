@@ -11,21 +11,34 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-berthott)']
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'fade-out': {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+        'slide-in': {
+          '0%': { transform: 'translateY(-100%)', visibility: 'none' },
+          '100%': { transform: 'translateY(0)', visibility: 'visible'},
+        },
+        'slide-out': {
+          '0%': { transform: 'translateY(0)', visibility: 'visible' },
+          '100%': { transform: 'translateY(-100%)', visibility: 'none' },
+        },
+      },
+      animation: {
+        'fade-in': 'fade-in 0.5s ease-out forwards',
+        'fade-out': 'fade-out 0.5s ease-out forwards',
+        'slide-in': 'slide-in 0.5s ease-out forwards',
+        'slide-out': 'slide-out 0.5s ease-out forwards',
       },
     },
     borderWidth: {
-      DEFAULT: '1px',
-      '0': '0',
-      '2': '2px',
-      '3': '3px',
-      '4': '4px',
-      '8': '8px',
       '10': '10px',
-    }
+    },
   },
   plugins: [],
 };
