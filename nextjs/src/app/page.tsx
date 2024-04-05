@@ -8,7 +8,9 @@ export default function Home() {
     <>
       <MenuContextProvider>
         <NavBar></NavBar>
-        { Object.keys(dummy_data).map(mix => <MixPage id={mix} key={mix}></MixPage>) }
+        <div className="pages">
+          { Object.keys(dummy_data).map(mix => <MixPage id={mix} key={mix}></MixPage>) }
+        </div>
       </MenuContextProvider>
     </>
   );

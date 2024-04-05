@@ -2,13 +2,7 @@
   /* scroll-snap-align: start;
   scroll-snap-stop: always; */
   
-  @apply 
-    relative
-    w-full
-    h-dvh
-    border-10
-    border-white;
-  
+ 
   .img {
     @apply 
       absolute
