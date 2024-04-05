@@ -5,26 +5,10 @@
     left-0
     bottom-0
     right-0
-    bg-black
-    opacity-60
     z-20;
 }
 
-.menu__list {
-  @apply
-    fixed
-    w-full
-    flex
-    flex-row-reverse
-    items-center
-    text-white
-    px-4
-    md:px-12
-    h-24
-    z-30;
-}
-
-.menu__item {
+.menuItem {
   @apply
     z-30;
 }
