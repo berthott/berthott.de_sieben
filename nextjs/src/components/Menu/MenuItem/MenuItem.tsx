@@ -6,9 +6,10 @@ import { MenuContext } from '../Menu.state';
 type MenuItemProps = PropsWithChildren<{
   id: string;
   title: string;
+  clickable?: boolean;
 }>;
 
-export default function MenuItem({ id }: MenuItemProps) {
+export default function MenuItem({ id, clickable = true }: MenuItemProps) {
   const menu = useContext(MenuContext);
   return (
     <Image 
@@ -19,8 +20,13 @@ export default function MenuItem({ id }: MenuItemProps) {
       height={300} 
       onDragStart={e => e.preventDefault()}
       onClick={() => {
+        if (!clickable)
+          return;
+
         menu.setShow(false);
         document.querySelector(`#${id}`)?.scrollIntoView({ behavior: 'smooth' });
+
+        console.log('clicked', clickable);
       }}>
     </Image>
   );

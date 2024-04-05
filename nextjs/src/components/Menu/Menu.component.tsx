@@ -24,7 +24,8 @@ export default function Menu() {
     documentRef.current = document.body;
   }, []);
 
-  const [zIndex, setZIndex] = useState<number>(31);
+  const [zIndex, setZIndex] = useState(31);
+  const [dragging, setDragging] = useState(false);
 
   const menu = useContext(MenuContext);
 
@@ -52,12 +53,16 @@ export default function Menu() {
             height: 300}}
           enableResizing={false}
           bounds='window'
-          onDragStart={(_, item) => { item.node.style.zIndex = '5000' }}
+          onDragStart={(_, item) => { 
+            item.node.style.zIndex = '5000';
+          }}
+          onDrag={() => setDragging(true)}
           onDragStop={(_, item) => { 
             setZIndex(zIndex + 1);
             item.node.style.zIndex = zIndex.toString();
-           }}>
-          <MenuItem id={key} title={data.text}></MenuItem>
+            setTimeout(() => setDragging(false), 100);
+          }}>
+          <MenuItem id={key} title={data.text} clickable={!dragging}></MenuItem>
         </Rnd>
       );
     })}
