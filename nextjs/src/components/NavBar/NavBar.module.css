@@ -17,13 +17,15 @@
       uppercase
       relative
       select-none
+      tracking-[2px]
+      transition-all
+      duration-1000
+      ease-out
       text-black;
   }
 
   .twice {
     text-shadow: 10px 0 0 black;
-    letter-spacing: 2px;
-    transition: all 1s ease-out;
   }
 }
 

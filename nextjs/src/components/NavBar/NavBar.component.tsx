@@ -16,7 +16,7 @@ let lastScrollTop = 0;
 export default function NavBar() {
   const menu = useContext(MenuContext);
 
-  const [titleStyle, setTitleStyle] = useState(styles.title);
+  const [titleTwice, setTitleTwice] = useState(false);
   const [slideClass, setSlideClass] = useState<string | undefined>(undefined);
 
   const onScroll = _.throttle(() => {
@@ -36,7 +36,7 @@ export default function NavBar() {
   }, 500);
 
   useEffect(() => {
-    setTimeout(() => setTitleStyle(`${styles.title} ${styles.twice}`), 500);
+    setTimeout(() => setTitleTwice(true), 500);
     window.addEventListener('scroll', onScroll);
     return () => {
       window.removeEventListener('scroll', onScroll);
@@ -49,7 +49,10 @@ export default function NavBar() {
   
   return (
     <>
-      <nav className={navStyle}>
+      <nav 
+          className={navStyle} 
+          onMouseEnter={() => setTitleTwice(false)}
+          onMouseLeave={() => setTitleTwice(true)}>
         <button onClick={() => menu.setShow(!menu.show)}>
           <Icon style={{fontSize: 60}}/>
         </button>
@@ -68,7 +71,7 @@ export default function NavBar() {
           </>
         )}
         <span className='grow'></span>
-        <span className={titleStyle}>berthott</span>
+        <span className={`${styles.title} ${titleTwice ? styles.twice : ''}`}>berthott</span>
       </nav>
       <Menu/>
     </>
