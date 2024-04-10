@@ -7,6 +7,7 @@ import { MenuItem } from './MenuItem';
 import { Rnd } from 'react-rnd';
 import { createPortal } from 'react-dom';
 import { MenuContext } from './Menu.state';
+import { Fade } from '@mui/material';
 
 enum MenuStyle {
   Layer,
@@ -26,32 +27,34 @@ export default function Menu() {
 
   const menu = useContext(MenuContext);
 
-  return menu.show  && documentRef.current && createPortal((
-    <div className={styles.menu}>
-    { Object.entries(dummy_data).map(([key, data]) => {
-      return (
-        <Rnd 
-          key={key} 
-          default={{
-            x: Math.random() * (window.innerWidth - 300), 
-            y: Math.random() * (window.innerHeight - 300), 
-            width: 300, 
-            height: 300}}
-          enableResizing={false}
-          bounds='window'
-          onDragStart={(_, item) => { 
-            item.node.style.zIndex = '5000';
-          }}
-          onDrag={() => setDragging(true)}
-          onDragStop={(_, item) => { 
-            setZIndex(zIndex + 1);
-            item.node.style.zIndex = zIndex.toString();
-            setTimeout(() => setDragging(false), 100);
-          }}>
-          <MenuItem id={key} title={data.text} clickable={!dragging}></MenuItem>
-        </Rnd>
-      );
-    })}
-    </div>
+  return documentRef.current && createPortal((
+    <Fade in={menu.show}>
+      <div className={styles.menu}>
+      { Object.entries(dummy_data).map(([key, data]) => {
+        return (
+          <Rnd 
+            key={key} 
+            default={{
+              x: Math.random() * (window.innerWidth - 300), 
+              y: Math.random() * (window.innerHeight - 300), 
+              width: 300, 
+              height: 300}}
+            enableResizing={false}
+            bounds='window'
+            onDragStart={(_, item) => { 
+              item.node.style.zIndex = '5000';
+            }}
+            onDrag={() => setDragging(true)}
+            onDragStop={(_, item) => { 
+              setZIndex(zIndex + 1);
+              item.node.style.zIndex = zIndex.toString();
+              setTimeout(() => setDragging(false), 100);
+            }}>
+            <MenuItem id={key} title={data.text} clickable={!dragging}></MenuItem>
+          </Rnd>
+        );
+      })}
+      </div>
+    </Fade>
   ), documentRef.current);
 }

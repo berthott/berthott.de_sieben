@@ -10,6 +10,7 @@ import WindowIcon from '@mui/icons-material/Window';
 import CloseIcon from '@mui/icons-material/Close';
 import { useContext, useEffect, useState } from 'react';
 import _ from 'lodash';
+import { Fade } from '@components/Fade';
 
 let lastScrollTop = 0;
 
@@ -54,22 +55,17 @@ export default function NavBar() {
           onMouseEnter={() => setTitleTwice(false)}
           onMouseLeave={() => setTitleTwice(true)}>
         <button onClick={() => menu.setShow(!menu.show)}>
-          <Icon style={{fontSize: 60}}/>
+          <Fade in={menu.show} states={{
+            a: <MenuIcon style={{fontSize: 60}}/>,
+            b: <CloseIcon style={{fontSize: 60}}/>,
+          }}/>
+        </button>  
+        <button onClick={() => menu.setShow(!menu.show)}>
+          <Fade in={menu.show} states={{
+            a: <SearchIcon style={{fontSize: 50}}/>,
+            b: <WindowIcon style={{fontSize: 50}}/>,
+          }}/>
         </button>
-        {!menu.show ? (
-          <button>
-            <SearchIcon style={{fontSize: 50}}/>
-          </button>
-        ) : (
-          <>
-            <button>
-              <AutoAwesomeMotionIcon style={{fontSize: 50}}/>
-            </button>
-            <button>
-              <WindowIcon style={{fontSize: 50}}/>
-            </button>
-          </>
-        )}
         <span className='grow'></span>
         <span className={`${styles.title} ${titleTwice ? styles.twice : ''}`}>berthott</span>
       </nav>
