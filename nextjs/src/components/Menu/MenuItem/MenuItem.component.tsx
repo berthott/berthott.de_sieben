@@ -2,7 +2,6 @@ import styles from '@components/Menu/MenuItem/MenuItem.module.css';
 import Image from 'next/image';
 import { PropsWithChildren, useContext } from 'react';
 import { MenuContext } from '../Menu.state';
-import { title } from 'process';
 
 type MenuItemProps = PropsWithChildren<{
   id: string;

@@ -1,8 +1,11 @@
 .fade {
-  display: grid;
-  place-content: center;
+  @apply
+    grid
+    place-content-center;
 
   > * {
-    grid-area: 1 / 1;
+    @apply
+      col-start-1
+      row-start-1;
   }
 }
