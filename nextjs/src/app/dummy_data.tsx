@@ -4,7 +4,7 @@ export type MixData = {
 
 export const dummy_data: MixData = {
   allfalldown: {
-    text: 'All Fall Down',
+    text: 'The fall of the empire is immanent',
     file: 'berthott - all fall down',
     mp3: 'berthott - all fall down.mp3',
     playfm: 'http://www.play.fm/recording/allfalldown20191',

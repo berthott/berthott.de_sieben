@@ -1,8 +1,43 @@
 .mix {
   @apply
-    bg-white
-    p-2
     absolute
     cursor-move
-    z-50;
+    z-30;
+
+  display: grid;
+  place-content: center;
+
+  > * {
+    grid-area: 1 / 1;
+  }
+
+  .image {
+    @apply
+      bg-white
+      p-2;
+  }
+
+  .hover {
+    @apply
+      opacity-0;
+    
+    &:hover {
+      @apply
+        opacity-100
+        bg-black/50
+        text-white
+        text-3xl
+        text-center
+        flex-col
+        content-center;  
+      
+      p::first-line {
+        @apply 
+          underline
+          underline-offset-[.4rem];
+      }
+    }
+    
+
+  }
 }
