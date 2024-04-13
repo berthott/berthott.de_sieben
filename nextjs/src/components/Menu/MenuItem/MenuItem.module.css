@@ -1,7 +1,5 @@
 .mix {
   @apply
-    absolute
-    cursor-move
     z-30
     grid
     place-content-center;

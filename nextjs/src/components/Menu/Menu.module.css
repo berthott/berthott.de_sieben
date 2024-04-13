@@ -1,4 +1,4 @@
-.menu {
+.menu_layer {
   @apply
     fixed
     top-0
@@ -6,9 +6,23 @@
     bottom-0
     right-0
     z-20;
+  
+  > * {
+    @apply
+      absolute
+      cursor-move;
+  }
 }
 
-.menuItem {
+.menu_grid {
   @apply
-    z-30;
+    fixed
+    top-0
+    left-0
+    bottom-0
+    right-0
+    z-20
+    grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  grid-template-rows: repeat(auto-fit, 300px);
 }

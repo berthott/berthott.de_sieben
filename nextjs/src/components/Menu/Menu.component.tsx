@@ -6,15 +6,8 @@ import { dummy_data } from '@app/dummy_data';
 import { MenuItem } from './MenuItem';
 import { Rnd } from 'react-rnd';
 import { createPortal } from 'react-dom';
-import { MenuContext } from './Menu.state';
+import { MenuContext, MenuStyle } from './Menu.state';
 import { Fade } from '@mui/material';
-
-enum MenuStyle {
-  Layer,
-  Grid,
-  List,
-}
-
 
 export default function Menu() {
   const documentRef = useRef<Element | null>(null);
@@ -29,9 +22,9 @@ export default function Menu() {
 
   return documentRef.current && createPortal((
     <Fade in={menu.show}>
-      <div className={styles.menu}>
+      <div className={styles[`menu_${menu.style}`]}>
       { Object.entries(dummy_data).map(([key, data]) => {
-        return (
+        return menu.style === MenuStyle.Layer ? (
           <Rnd 
             key={key} 
             default={{
@@ -52,6 +45,8 @@ export default function Menu() {
             }}>
             <MenuItem id={key} title={data.text} clickable={!dragging}></MenuItem>
           </Rnd>
+        ) : (
+          <MenuItem key={key} id={key} title={data.text}></MenuItem>
         );
       })}
       </div>

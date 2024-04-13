@@ -1,7 +1,7 @@
 'use client';
 
 import { Menu } from '@components/Menu';
-import { MenuContext } from '@components/Menu/Menu.state';
+import { MenuContext, MenuStyle } from '@components/Menu/Menu.state';
 import styles from '@components/NavBar/NavBar.module.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -44,9 +44,8 @@ export default function NavBar() {
     };
   }, []);
 
-  const Icon = menu.show ? CloseIcon : MenuIcon;
-
   const navStyle = !slideClass ? styles.nav : `${styles.nav} ${slideClass}`;
+  const StyleIcon = menu.style === MenuStyle.Layer ? WindowIcon : AutoAwesomeMotionIcon;
   
   return (
     <>
@@ -60,10 +59,10 @@ export default function NavBar() {
             b: <CloseIcon style={{fontSize: 60}}/>,
           }}/>
         </button>  
-        <button onClick={() => menu.setShow(!menu.show)}>
+        <button onClick={() => menu.toggleStyle()}>
           <Fade in={menu.show} states={{
             a: <SearchIcon style={{fontSize: 50}}/>,
-            b: <WindowIcon style={{fontSize: 50}}/>,
+            b: <StyleIcon style={{fontSize: 50}}/>,
           }}/>
         </button>
         <span className='grow'></span>
