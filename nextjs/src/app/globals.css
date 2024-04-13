@@ -35,26 +35,27 @@ body {
     flex 
     flex-col 
     divide-y-10 
-    border-x-10 
-    border-b-10
     border-white;
 
   & > * {
     @apply 
       relative
       w-full 
-      h-[calc(100vh-10px)]
+      min-h-[calc(100vh-10px)]
       border-white;
-
-      &:first-child {
-        @apply 
-          border-t-10
-          h-[calc(100vh-10px)];
-      }
-
-      &:last-child {
-        @apply 
-          border-b-10;
-      }
   }
+}
+
+.border {
+  @apply 
+    fixed 
+    bg-transparent
+    top-0
+    left-0
+    right-0
+    bottom-0
+    border-10
+    border-white
+    pointer-events-none
+    z-50;
 }

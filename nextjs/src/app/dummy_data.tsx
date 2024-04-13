@@ -1,8 +1,17 @@
 export type MixData = {
-  [key: string]: any;
+  text: string;
+  file: string;
+  mp3: string;
+  playfm: string;
+  date: string;
+  tracklist: string[];
 }
 
-export const dummy_data: MixData = {
+export type MixDatas = {
+  [key: string]: MixData;
+}
+
+export const dummy_data: MixDatas = {
   allfalldown: {
     text: 'The fall of the empire is immanent',
     file: 'berthott - all fall down',

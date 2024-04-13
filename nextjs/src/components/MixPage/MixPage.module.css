@@ -1,15 +1,70 @@
 .page {
-  /* scroll-snap-align: start;
-  scroll-snap-stop: always; */
+  @apply
+    relative;
   
- 
   .img {
+    @apply 
+      sticky
+      top-0
+      object-cover;
+  }
+
+  .title_container {
     @apply 
       absolute
       top-0
+      bottom-0
       left-0
+      right-0
+      flex
+      flex-col
+      items-end
       w-full
-      h-full
-      object-cover;
+      h-lvh;
+  }
+
+  .tracklist_container {
+    @apply
+      relative
+      flex
+      flex-col
+      items-end
+      w-full;
+  }
+
+  .tracklist {
+    @apply
+      p-10
+      pt-0
+      bg-white
+      text-center
+      w-6/12;
+  }
+  
+  .title {
+    @apply
+      absolute
+      bottom-0
+      w-6/12
+      p-10
+      pb-[calc(2.5rem+10px)]
+      bg-white
+      text-center;
+    
+    h2 {
+      @apply
+        text-3xl
+        font-bold;
+      
+      &::after {
+          @apply
+            content-['']
+            block
+            w-full
+            h-1
+            my-4
+            bg-black;
+        }
+    }
   }
 }

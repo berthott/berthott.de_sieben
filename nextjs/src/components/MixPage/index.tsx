@@ -1,1 +1,1 @@
-export { default as MixPage } from './MixPage';
+export { default as MixPage } from './MixPage.component';
