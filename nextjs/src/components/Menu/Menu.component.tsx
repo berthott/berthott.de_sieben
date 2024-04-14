@@ -5,17 +5,22 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { dummy_data } from '@app/dummy_data';
 import { MenuItem } from './MenuItem';
 import { Rnd } from 'react-rnd';
+import { createPortal } from 'react-dom';
 import { MenuContext, MenuStyle } from './Menu.state';
 import { Fade } from '@mui/material';
 
 export default function Menu() {
+  const documentRef = useRef<Element | null>(null);
+  useEffect(() => {
+    documentRef.current = document.body;
+  }, []);
 
   const [zIndex, setZIndex] = useState(31);
   const [dragging, setDragging] = useState(false);
 
   const menu = useContext(MenuContext);
 
-  return (
+  return documentRef.current && (
     <Fade in={menu.show}>
       <div className={styles[`menu_${menu.style}`]}>
       { Object.entries(dummy_data).map(([key, data]) => {
