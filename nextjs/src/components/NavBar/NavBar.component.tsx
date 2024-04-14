@@ -48,7 +48,7 @@ export default function NavBar() {
   const StyleIcon = menu.style === MenuStyle.Layer ? WindowIcon : AutoAwesomeMotionIcon;
   
   return (
-    <>
+    <div className={styles.nav_container}>
       <nav 
           className={navStyle} 
           onMouseEnter={() => setTitleTwice(false)}
@@ -69,6 +69,6 @@ export default function NavBar() {
         <span className={`${styles.title} ${titleTwice ? styles.twice : ''}`}>berthott</span>
       </nav>
       <Menu/>
-    </>
+    </div>
   );
 };

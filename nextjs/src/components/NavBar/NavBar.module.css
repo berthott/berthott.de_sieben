@@ -1,6 +1,16 @@
-.nav {
+.nav_container {
   @apply 
     fixed
+    w-full
+    h-full
+    pointer-events-none
+    z-50;
+}
+
+
+.nav {
+  @apply 
+    pointer-events-auto
     w-full
     flex
     flex-row-reverse
@@ -8,8 +18,10 @@
     gap-[18px]
     px-[36px]
     h-24
-    z-50
-    bg-white;
+    bg-white
+    transition-all
+    duration-500
+    ease-out;
 
   .title {
     @apply 
@@ -31,10 +43,10 @@
 
 .slide-out {
   @apply 
-    animate-slide-out;
-}
-
-.slide-in {
-  @apply 
-    animate-slide-in;
+    translate-y-[-100%]
+    mt-[-6em]
+    invisible
+    transition-all
+    duration-500
+    ease-out;
 }
