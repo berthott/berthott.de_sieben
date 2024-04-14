@@ -1,0 +1,11 @@
+.page {
+  @apply
+    relative;
+  
+  .img {
+    @apply 
+      sticky
+      top-0
+      object-cover;
+  }
+}
