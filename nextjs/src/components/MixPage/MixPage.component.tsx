@@ -26,23 +26,25 @@ export default function MixPage({id, data}: MixPageProps) {
           width: '100%',
           height: '100vh',
         }}/>
-      <div className={styles.play_container}>
-        <button className={styles.play} onClick={() => player.play(id)}>
-          <PlayArrowRoundedIcon  style={{fontSize: 200}}/>
-        </button>
-      </div>
-      <div className={styles.title_container}>
-        <div className={styles.title}>
-          <h2>{data.text}</h2>
-          <h3>{data.date}</h3>
+      <div id={`${id}_tracklist`}>
+        <div className={styles.play_container}>
+          <button className={styles.play} onClick={() => player.play(id)}>
+            <PlayArrowRoundedIcon  style={{fontSize: 200}}/>
+          </button>
         </div>
-      </div>
+        <div className={styles.title_container}>
+          <div className={styles.title}>
+            <h2>{data.text}</h2>
+            <h3>{data.date}</h3>
+          </div>
+        </div>
 
-      <div className={styles.tracklist_container}>
-        <div className={styles.tracklist} id={`${id}_tracklist`}>
-          <ul>
-            {data.tracklist.map((track, i) => <li key={`${id}_tracklist_${i}`}>{track}</li>)}
-          </ul>
+        <div className={styles.tracklist_container}>
+          <div className={styles.tracklist}>
+            <ul>
+              {data.tracklist.map((track, i) => <li key={`${id}_tracklist_${i}`}>{track}</li>)}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

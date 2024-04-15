@@ -8,7 +8,7 @@
     flex
     flex-row-reverse
     items-center
-    px-[36px]
+    pr-[36px]
     gap-[18px]
     bg-white
     overflow-hidden
@@ -24,4 +24,9 @@
     transition-all
     duration-500
     ease-out;
+}
+
+.waveform {
+  @apply
+    flex-grow
 }
