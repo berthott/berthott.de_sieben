@@ -23,3 +23,4 @@ services:
       - traefik.http.routers.berthott.rule=Host(`berthott.syspons.local`)
       - traefik.http.routers.berthott.tls=true
       - traefik.http.routers.berthott.tls.certresolver=lets-encrypt
+      - traefik.http.services.berthott.loadbalancer.server.port=3000
