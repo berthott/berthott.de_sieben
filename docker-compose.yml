@@ -64,6 +64,7 @@ services:
       PUBLIC_URL:
 
       CACHE_ENABLED: 'true'
+      CACHE_AUTO_PURGE: 'true'
       CACHE_STORE: 'redis'
       REDIS: 'redis://redis:6379'
 
