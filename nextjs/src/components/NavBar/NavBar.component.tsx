@@ -42,7 +42,7 @@ export default function NavBar() {
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [onScroll]);
 
   const navStyle = !slideClass ? styles.nav : `${styles.nav} ${slideClass}`;
   const StyleIcon = menu.style === MenuStyle.Layer ? WindowIcon : AutoAwesomeMotionIcon;

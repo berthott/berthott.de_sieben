@@ -33,7 +33,7 @@ export default function Player() {
       <Image 
         className={styles.img} 
         src={`/images/${player.currentlyPlaying}.jpg`} 
-        alt={player.currentlyPlaying} 
+        alt={player.currentlyPlaying || 'preview'} 
         width={0}
         height={0} 
         sizes="6rem" style={{
