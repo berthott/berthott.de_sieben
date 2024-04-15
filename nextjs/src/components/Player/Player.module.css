@@ -1,0 +1,27 @@
+.player {
+  @apply 
+    sticky
+    bottom-0
+    w-full
+    z-40
+    h-24
+    flex
+    flex-row-reverse
+    items-center
+    px-[36px]
+    gap-[18px]
+    bg-white
+    overflow-hidden
+    transition-all
+    duration-500
+    ease-out;
+}
+
+.slide_out {
+  @apply 
+    translate-y-[100%]
+    h-0
+    transition-all
+    duration-500
+    ease-out;
+}

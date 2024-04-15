@@ -1,8 +1,11 @@
+'use client';
+
 import { MixData } from '@app/dummy_data';
 import styles from '@components/MixPage/MixPage.module.css';
 import Image from 'next/image';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useContext } from 'react';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
+import { PlayerContext } from '@components/Player/Player.state';
 
 export type MixPageProps = PropsWithChildren<{
   id: string;
@@ -10,6 +13,7 @@ export type MixPageProps = PropsWithChildren<{
 }>;
 
 export default function MixPage({id, data}: MixPageProps) {
+  const player = useContext(PlayerContext);
   return (
     <section className={styles.page} id={id}>
       <Image 
@@ -23,7 +27,7 @@ export default function MixPage({id, data}: MixPageProps) {
           height: '100vh',
         }}/>
       <div className={styles.play_container}>
-        <button className={styles.play} onClick={undefined}>
+        <button className={styles.play} onClick={() => player.play(id)}>
           <PlayArrowRoundedIcon  style={{fontSize: 200}}/>
         </button>
       </div>

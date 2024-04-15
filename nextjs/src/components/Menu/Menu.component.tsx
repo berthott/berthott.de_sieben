@@ -5,7 +5,6 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { dummy_data } from '@app/dummy_data';
 import { MenuItem } from './MenuItem';
 import { Rnd } from 'react-rnd';
-import { createPortal } from 'react-dom';
 import { MenuContext, MenuStyle } from './Menu.state';
 import { Fade } from '@mui/material';
 

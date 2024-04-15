@@ -11,20 +11,6 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-berthott)']
       },
-      keyframes: {
-        'slide-in': {
-          '0%': { transform: 'translateY(-100%)', visibility: 'none' },
-          '100%': { transform: 'translateY(0)', visibility: 'visible'},
-        },
-        'slide-out': {
-          '0%': { transform: 'translateY(0)', visibility: 'visible' },
-          '100%': { transform: 'translateY(-100%)', visibility: 'none' },
-        },
-      },
-      animation: {
-        'slide-in': 'slide-in 0.5s ease-out forwards',
-        'slide-out': 'slide-out 0.5s ease-out forwards',
-      },
     },
     borderWidth: {
       '10': '10px',

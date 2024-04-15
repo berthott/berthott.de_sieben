@@ -33,11 +33,8 @@ body {
     divide-y-10 
     border-white;
 
-  & > * {
-    @apply 
-      relative
-      w-full 
-      min-h-[calc(100vh-10px)]
+  > * {
+    @apply
       border-white;
   }
 }
