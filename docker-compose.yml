@@ -44,7 +44,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./directus/uploads:/directus/uploads
-      - ./extensions:/directus/extensions
+      - ./directus/extensions:/directus/extensions
     depends_on:
       - cache
       - db
