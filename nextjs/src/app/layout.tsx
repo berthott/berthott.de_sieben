@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { StoreProvider } from '@store/store.provider';
 
 const font = Inter({ 
   subsets: ['latin'],
@@ -19,7 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${font.variable} font-sans`}>{children}</body>
+      <body className={`${font.variable} font-sans`}>
+        <StoreProvider>
+          {children}
+        </StoreProvider>
+      </body>
     </html>
   );
 }
