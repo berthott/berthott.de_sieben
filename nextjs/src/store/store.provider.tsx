@@ -1,11 +1,16 @@
 'use client';
 
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useRef } from 'react';
 import { Provider } from 'react-redux';
-import store from './store';
+import { makeStore, AppStore } from './store';
 
 export const StoreProvider = ({ children }: PropsWithChildren) => {
+  const storeRef = useRef<AppStore>();
+  if (!storeRef.current) {
+    storeRef.current = makeStore();
+  }
+
   return (
-    <Provider store={store}>{ children }</Provider>
+    <Provider store={storeRef.current}>{ children }</Provider>
   )
 };

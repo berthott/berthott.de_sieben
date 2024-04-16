@@ -1,7 +1,7 @@
 'use client';
 
 import { Menu } from '@components/Menu';
-import { MenuContext, MenuStyle } from '@components/Menu/Menu.state';
+import { MenuStyle, menuActions } from '@components/Menu/Menu.state';
 import styles from '@components/NavBar/NavBar.module.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -11,11 +11,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useContext, useEffect, useState } from 'react';
 import _ from 'lodash';
 import { Fade } from '@components/Fade';
+import { useAppDispatch, useAppSelector } from '@store/store';
 
 let lastScrollTop = 0;
 
 export default function NavBar() {
-  const menu = useContext(MenuContext);
+  const menu = useAppSelector(state => state.menu);
+  const dispatch = useAppDispatch();
 
   const [titleTwice, setTitleTwice] = useState(false);
   const [slideClass, setSlideClass] = useState<string | undefined>(undefined);
@@ -53,13 +55,13 @@ export default function NavBar() {
           className={navStyle} 
           onMouseEnter={() => setTitleTwice(false)}
           onMouseLeave={() => setTitleTwice(true)}>
-        <button onClick={() => menu.setShow(!menu.show)}>
+        <button onClick={() => dispatch(menuActions.show(!menu.show))}>
           <Fade in={menu.show} states={{
             a: <MenuIcon style={{fontSize: 60}}/>,
             b: <CloseIcon style={{fontSize: 60}}/>,
           }}/>
         </button>  
-        <button onClick={() => menu.toggleStyle()}>
+        <button onClick={() => dispatch(menuActions.toggleLayerGridStyle())}>
           <Fade in={menu.show} states={{
             a: <SearchIcon style={{fontSize: 50}}/>,
             b: <StyleIcon style={{fontSize: 50}}/>,

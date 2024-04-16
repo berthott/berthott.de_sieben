@@ -1,7 +1,8 @@
 import styles from '@components/Menu/MenuItem/MenuItem.module.css';
 import Image from 'next/image';
-import { PropsWithChildren, useContext } from 'react';
-import { MenuContext } from '../Menu.state';
+import { PropsWithChildren } from 'react';
+import { menuActions } from '../Menu.state';
+import { useAppDispatch } from '@store/store';
 
 type MenuItemProps = PropsWithChildren<{
   id: string;
@@ -10,7 +11,7 @@ type MenuItemProps = PropsWithChildren<{
 }>;
 
 export default function MenuItem({ id, title, clickable = true }: MenuItemProps) {
-  const menu = useContext(MenuContext);
+  const dispatch = useAppDispatch();
   return (
     <div 
         className={styles.mix}
@@ -19,7 +20,7 @@ export default function MenuItem({ id, title, clickable = true }: MenuItemProps)
           if (!clickable)
             return;
 
-          menu.setShow(false);
+          dispatch(menuActions.hide());
           document.querySelector(`#${id}`)?.scrollIntoView({ behavior: 'smooth' });
         }}>
       <Image 

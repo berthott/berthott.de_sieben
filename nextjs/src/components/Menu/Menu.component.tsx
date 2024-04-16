@@ -1,12 +1,13 @@
 'use client';
 
 import styles from '@components/Menu/Menu.module.css';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { dummy_data } from '@app/dummy_data';
 import { MenuItem } from './MenuItem';
 import { Rnd } from 'react-rnd';
-import { MenuContext, MenuStyle } from './Menu.state';
+import { MenuStyle } from './Menu.state';
 import { Fade } from '@mui/material';
+import { useAppSelector } from '@store/store';
 
 export default function Menu() {
   const documentRef = useRef<Element | null>(null);
@@ -17,7 +18,7 @@ export default function Menu() {
   const [zIndex, setZIndex] = useState(31);
   const [dragging, setDragging] = useState(false);
 
-  const menu = useContext(MenuContext);
+  const menu = useAppSelector(state => state.menu);
 
   return documentRef.current && (
     <Fade in={menu.show}>

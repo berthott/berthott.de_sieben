@@ -1,6 +1,4 @@
-'use client';
-
-import { PropsWithChildren, createContext, useReducer } from 'react';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export enum MenuStyle {
   Layer = 'layer',
@@ -18,69 +16,43 @@ export const initialMenuState: MenuState = {
   style: MenuStyle.Layer,
 };
 
-export type MenuContextState = MenuState & {
-  setShow: (show: boolean) => void;
-  setStyle: (style: MenuStyle) => void;
-  toggleStyle: () => void;
-};
-
-export const MenuContext = createContext<MenuContextState>({
-  ...initialMenuState, 
-  setShow: () => {},
-  setStyle: () => {},
-  toggleStyle: () => {},
+const menuSlice = createSlice({
+  name: 'menu',
+  initialState: initialMenuState,
+  reducers: {
+    show: {
+      reducer: (state, action: PayloadAction<boolean>) => {
+        state.show = action.payload;
+      },
+      prepare: (show?: boolean) => ({
+        payload: show ?? true,
+      }),
+    },
+    hide: {
+      reducer: (state, action: PayloadAction<boolean>) => {
+        state.show = !action.payload;
+      },
+      prepare: (hide?: boolean) => ({
+        payload: !hide ?? true,
+      }),
+    },
+    setStyle: (state, action: PayloadAction<MenuStyle>) => {
+      state.style = action.payload;
+    },
+    setLayerStyle: state => {
+      state.style = MenuStyle.Layer;
+    },
+    setGridStyle: state => {
+      state.style = MenuStyle.Grid;
+    },
+    setListStyle: state => {
+      state.style = MenuStyle.List;
+    },
+    toggleLayerGridStyle: state => {
+      state.style = state.style === MenuStyle.Layer ? MenuStyle.Grid : MenuStyle.Layer;
+    },
+  }
 });
 
-export type MenuAction = {
-  type: string;
-  payload?: any;
-};
-
-export const menuActions: MenuAction[] = [
-  { type: 'SHOW' },
-  { type: 'HIDE' },
-  { type: 'LAYER' },
-  { type: 'GRID' },
-  { type: 'LIST' },
-];
-
-export const menuReducer = (state: MenuState, action: MenuAction): MenuState => {
-  switch (action.type) {
-    case 'SHOW':
-      return { ...state, show: true };
-    case 'HIDE':
-      return { ...state, show: false };
-    case 'LAYER':
-      return { ...state, style: MenuStyle.Layer };
-    case 'GRID':
-      return { ...state, style: MenuStyle.Grid };
-    case 'List':
-      return { ...state, style: MenuStyle.List };
-    default:
-      return state;
-  }
-};
-
-
-export const MenuContextProvider = ({ children }: PropsWithChildren) => {
-  const [state, dispatch] = useReducer(menuReducer, initialMenuState);
-
-  return (
-    <MenuContext.Provider value={{
-      ...state,
-      setShow: (show: boolean) => dispatch({ type: show ? 'SHOW' : 'HIDE' }),
-      setStyle: (style: MenuStyle) => {
-        let type = '';
-        switch(style) {
-          case MenuStyle.Layer: type = 'LAYER';
-          case MenuStyle.Grid: type = 'GRID';
-          case MenuStyle.List: type = 'LIST';
-        }
-        dispatch({ type });
-      },
-      toggleStyle: () => dispatch({ type: state.style === MenuStyle.Layer ? 'GRID' : 'LAYER'})
-    }}>
-      {children}
-    </MenuContext.Provider>
-  );
-}
+export const menuActions = menuSlice.actions;
+export const menuReducer = menuSlice.reducer;
