@@ -30,7 +30,7 @@ export default function Player() {
           b: <PauseIcon style={{fontSize: 60}}/>,
         }}/>
       </button>
-      <Image 
+      {player.currentlyPlaying && <Image 
         className={styles.img} 
         src={`/images/${player.currentlyPlaying}.jpg`} 
         alt={player.currentlyPlaying || 'preview'} 
@@ -39,7 +39,7 @@ export default function Player() {
         sizes="6rem" style={{
           width: '6rem',
           height: '6rem',
-        }}/>
+        }}/>}
     </div>
   );
 }
