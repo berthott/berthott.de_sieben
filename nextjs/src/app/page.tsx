@@ -8,8 +8,8 @@ import PicturePage from '@components/PicturePage/PicturePage.component';
 import { Player } from '@components/Player';
 import { PlayerContextProvider } from '@components/Player/Player.state';
 import { useEffect, useState } from 'react';
-import { getMixes } from './directus/directus.helpers';
-import { Mixes } from './directus/directus';
+import { getMixes } from '../directus/directus.helpers';
+import { Mixes } from '../directus/directus';
 
 export default function Home() {
   const [mixes, setMixes] = useState<Mixes[]>([]);
