@@ -1,21 +1,22 @@
  'use client';
 
 import styles from '@components/Player/Player.module.css';
-import { PlayerContext } from './Player.state';
-import { useContext } from 'react';
+import { playerActions } from './Player.state';
 import CloseIcon from '@mui/icons-material/Close';
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import { Fade } from '@components/Fade';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import Image from 'next/image';
+import { useAppDispatch, useAppSelector } from '@store/store';
 
 
 export default function Player() {
-  const player = useContext(PlayerContext);
+  const player = useAppSelector(state => state.player);
+  const dispatch = useAppDispatch();
   return (
     <div className={`${styles.player} ${!player.show ? styles.slide_out : ''}`}>
-      <button onClick={() => player.setShow(false)}>
+      <button onClick={() => dispatch(playerActions.hide())}>
         <CloseIcon style={{fontSize: 60}}/>
       </button>
       <button onClick={() => document.querySelector(`#${player.currentlyPlaying}_tracklist`)?.scrollIntoView({ behavior: 'smooth' })}>
@@ -24,7 +25,7 @@ export default function Player() {
       <div className={styles.waveform}>
         currently playing: {player.currentlyPlaying}
       </div>
-      <button onClick={() => player.togglePlay(!player.playing)}>
+      <button onClick={() => dispatch(playerActions.togglePlay())}>
         <Fade in={player.playing} states={{
           a: <PlayArrowIcon style={{fontSize: 60}}/>,
           b: <PauseIcon style={{fontSize: 60}}/>,

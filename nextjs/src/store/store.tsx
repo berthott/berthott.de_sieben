@@ -1,10 +1,12 @@
 import { menuReducer } from '@components/Menu/Menu.state';
+import { playerReducer } from '@components/Player/Player.state';
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 
 export const makeStore = () => configureStore({
   reducer: {
     menu: menuReducer,
+    player: playerReducer,
   },
 });
 

@@ -5,7 +5,8 @@ import styles from '@components/MixPage/MixPage.module.css';
 import Image from 'next/image';
 import { PropsWithChildren, useContext } from 'react';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import { PlayerContext } from '@components/Player/Player.state';
+import { useAppDispatch } from '@store/store';
+import { playerActions } from '@components/Player/Player.state';
 
 export type MixPageProps = PropsWithChildren<{
   id: string;
@@ -13,7 +14,7 @@ export type MixPageProps = PropsWithChildren<{
 }>;
 
 export default function MixPage({id, data}: MixPageProps) {
-  const player = useContext(PlayerContext);
+  const dispatch = useAppDispatch();
   return (
     <section className={styles.page} id={id}>
       <Image 
@@ -28,7 +29,7 @@ export default function MixPage({id, data}: MixPageProps) {
         }}/>
       <div id={`${id}_tracklist`}>
         <div className={styles.play_container}>
-          <button className={styles.play} onClick={() => player.play(id)}>
+          <button className={styles.play} onClick={() => dispatch(playerActions.play(id))}>
             <PlayArrowRoundedIcon  style={{fontSize: 200}}/>
           </button>
         </div>

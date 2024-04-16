@@ -1,7 +1,4 @@
-'use client';
-
-import { PropsWithChildren, createContext, useReducer } from 'react';
-import { act } from 'react-dom/test-utils';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export type PlayerState = {
   show: boolean;
@@ -14,57 +11,35 @@ export const initialPlayerState: PlayerState = {
   playing: false,
 };
 
-export type PlayerContextState = PlayerState & {
-  setShow: (show: boolean) => void;
-  play: (id: string) => void;
-  togglePlay: (playing: boolean) => void;
-};
-
-export const PlayerContext = createContext<PlayerContextState>({
-  ...initialPlayerState, 
-  setShow: () => {},
-  play: () => {},
-  togglePlay: () => {},
+const playerSlice = createSlice({
+  name: 'player',
+  initialState: initialPlayerState,
+  reducers: {
+    show: {
+      reducer: (state, action: PayloadAction<boolean>) => {
+        state.show = action.payload;
+      },
+      prepare: (show?: boolean) => ({
+        payload: show ?? true,
+      }),
+    },
+    hide: {
+      reducer: (state, action: PayloadAction<boolean>) => {
+        state.show = !action.payload;
+      },
+      prepare: (hide?: boolean) => ({
+        payload: !hide ?? true,
+      }),
+    },
+    play: (state, action: PayloadAction<string>) => {
+      state.show = true;
+      state.currentlyPlaying = action.payload;
+    },
+    togglePlay: state => {
+      state.playing = !state.playing;
+    },
+  }
 });
 
-export type PlayerAction = {
-  type: string;
-  payload?: any;
-};
-
-export const playerActions: PlayerAction[] = [
-  { type: 'SHOW' },
-  { type: 'PLAY' },
-  { type: 'TOGGLE_PLAY' },
-];
-
-export const playerReducer = (state: PlayerState, action: PlayerAction): PlayerState => {
-  switch (action.type) {
-    case 'SHOW':
-      return { ...state, show: true, playing: false };
-    case 'HIDE':
-      return { ...state, show: false };
-    case 'PLAY':
-      return { ...state, show: true, currentlyPlaying: action.payload };
-    case 'TOGGLE_PLAY':
-      return { ...state, playing: action.payload };
-    default:
-      return state;
-  }
-};
-
-
-export const PlayerContextProvider = ({ children }: PropsWithChildren) => {
-  const [state, dispatch] = useReducer(playerReducer, initialPlayerState);
-
-  return (
-    <PlayerContext.Provider value={{
-      ...state,
-      setShow: (show: boolean) => dispatch({ type: show ? 'SHOW' : 'HIDE' }),
-      play: (id: string) => dispatch({ type: 'PLAY', payload: id }),
-      togglePlay: (playing: boolean) => dispatch({ type: 'TOGGLE_PLAY', payload: playing }),
-    }}>
-      {children}
-    </PlayerContext.Provider>
-  );
-}
+export const playerActions = playerSlice.actions;
+export const playerReducer = playerSlice.reducer;
