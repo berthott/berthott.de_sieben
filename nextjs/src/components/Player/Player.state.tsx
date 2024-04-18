@@ -3,12 +3,10 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 export type PlayerState = {
   show: boolean;
   currentlyPlaying?: string;
-  playing?: boolean;
 };
 
 export const initialPlayerState: PlayerState = {
   show: false,
-  playing: false,
 };
 
 const playerSlice = createSlice({
@@ -34,9 +32,6 @@ const playerSlice = createSlice({
     play: (state, action: PayloadAction<string>) => {
       state.show = true;
       state.currentlyPlaying = action.payload;
-    },
-    togglePlay: state => {
-      state.playing = !state.playing;
     },
   }
 });

@@ -28,5 +28,11 @@
 
 .waveform {
   @apply
-    flex-grow
+    flex-grow;
+
+  .duration {
+    @apply
+      text-xs
+      text-gray-500;
+  }
 }
