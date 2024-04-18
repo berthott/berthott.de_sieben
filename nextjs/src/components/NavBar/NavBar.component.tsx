@@ -43,13 +43,14 @@ export default function NavBar(props: MenuProps) {
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }, 500);
 
+  /* eslint-disable react-hooks/exhaustive-deps */ // add onScroll as a dependency will break the behavior
   useEffect(() => {
     setTimeout(() => setTitleTwice(true), 500);
     window.addEventListener('scroll', onScroll);
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, []); // add onScroll as a dependency will break the behavior
+  }, []); 
 
   const navStyle = !slideClass ? styles.nav : `${styles.nav} ${slideClass}`;
   const StyleIcon = menu.style === MenuStyle.Layer ? WindowIcon : AutoAwesomeMotionIcon;
