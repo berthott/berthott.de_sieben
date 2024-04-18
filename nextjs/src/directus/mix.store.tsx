@@ -1,15 +1,14 @@
-import { Mixes } from './directus';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { loadMixes } from './directus.helpers';
+import { DirectusHelper } from './directus.helpers';
 import { buildCreateSlice, asyncThunkCreator } from '@reduxjs/toolkit'
+import { Mixes } from './mix.model';
 
 export const createAppSlice = buildCreateSlice({
   creators: { asyncThunk: asyncThunkCreator },
 })
 
-
 export type MixesState = {
-  data: Mixes[];
+  data: Mixes;
   loading: boolean;
   error?: string;
 };
@@ -24,8 +23,8 @@ const mixesSlice = createAppSlice({
   initialState: initialMixesState,
   reducers: create => {
     return {
-      loadMixes: create.asyncThunk<Mixes[]>(async () => {
-        return await loadMixes();
+      loadMixes: create.asyncThunk<Mixes>(async () => {
+        return await DirectusHelper.instance().loadMixes();
       }, {
         pending: state => {
           state.loading = true;
@@ -34,7 +33,7 @@ const mixesSlice = createAppSlice({
           state.loading = false;
           state.error = action.error.message;
         },
-        fulfilled: (state, action: PayloadAction<Mixes[]>) => {
+        fulfilled: (state, action: PayloadAction<Mixes>) => {
           state.loading = false;
           state.data = action.payload;
         }
@@ -43,5 +42,11 @@ const mixesSlice = createAppSlice({
   },
 });
 
+const selectors = {
+  selectMixes: (state: { mixes: MixesState }) => state.mixes.data,
+  selectMixById: (state: { mixes: MixesState }, id: number) => state.mixes.data.find(mix => mix.id === id),
+};
+
 export const mixesActions = mixesSlice.actions;
 export const mixesReducer = mixesSlice.reducer;
+export const mixesSelectors = selectors;

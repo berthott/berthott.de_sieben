@@ -1,16 +1,16 @@
 import styles from '@components/Menu/MenuItem/MenuItem.module.css';
 import Image from 'next/image';
-import { PropsWithChildren } from 'react';
 import { menuActions } from '../Menu.state';
 import { useAppDispatch } from '@store/store';
+import { Mix } from '@directus/mix.model';
+import { assetsUrl } from '@directus/directus.helpers';
 
-type MenuItemProps = PropsWithChildren<{
-  id: string;
-  title: string;
+type MenuItemProps = {
+  mix: Mix
   clickable?: boolean;
-}>;
+};
 
-export default function MenuItem({ id, title, clickable = true }: MenuItemProps) {
+export default function MenuItem({ mix, clickable = true }: MenuItemProps) {
   const dispatch = useAppDispatch();
   return (
     <div 
@@ -21,17 +21,17 @@ export default function MenuItem({ id, title, clickable = true }: MenuItemProps)
             return;
 
           dispatch(menuActions.hide());
-          document.querySelector(`#${id}`)?.scrollIntoView({ behavior: 'smooth' });
+          document.querySelector(`#${mix.key}`)?.scrollIntoView({ behavior: 'smooth' });
         }}>
       <Image 
         className={styles.image} 
-        src={`/images/${id}.jpg`} 
-        alt={id} 
+        src={assetsUrl(mix.image)} 
+        alt={mix.title || 'preview'} 
         width={300} 
         height={300} 
         />
       <div className={styles.hover}>
-        <p className={styles.title}>{title}</p>
+        <p className={styles.title}>{mix.title}</p>
       </div>
     </div>
   );

@@ -354,6 +354,13 @@ export type DirectusWebhooks = {
   url: string;
 };
 
+export type Global = {
+  cover_image?: string | DirectusFiles | null;
+  description?: string | null;
+  id: number;
+  title?: string | null;
+};
+
 export type Mixes = {
   audio?: string | DirectusFiles | null;
   date_created?: string | null;
@@ -391,5 +398,6 @@ export type CustomDirectusTypes = {
   directus_users: DirectusUsers[];
   directus_versions: DirectusVersions[];
   directus_webhooks: DirectusWebhooks[];
+  global: Global[];
   mixes: Mixes[];
 };

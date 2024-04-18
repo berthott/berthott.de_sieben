@@ -2,14 +2,18 @@
 
 import styles from '@components/Menu/Menu.module.css';
 import { useEffect, useRef, useState } from 'react';
-import { dummy_data } from '@app/dummy_data';
 import { MenuItem } from './MenuItem';
 import { Rnd } from 'react-rnd';
 import { MenuStyle } from './Menu.state';
 import { Fade } from '@mui/material';
 import { useAppSelector } from '@store/store';
+import { Mixes } from '@directus/mix.model';
 
-export default function Menu() {
+export type MenuProps = {
+  mixes: Mixes;
+};
+
+export default function Menu({ mixes }: MenuProps) {
   const documentRef = useRef<Element | null>(null);
   useEffect(() => {
     documentRef.current = document.body;
@@ -23,10 +27,10 @@ export default function Menu() {
   return documentRef.current && (
     <Fade in={menu.show}>
       <div className={styles[`menu_${menu.style}`]}>
-      { Object.entries(dummy_data).map(([key, data]) => {
+      { mixes.map(mix => {
         return menu.style === MenuStyle.Layer ? (
           <Rnd 
-            key={key} 
+            key={mix.key} 
             default={{
               x: Math.random() * (window.innerWidth - 300), 
               y: Math.random() * (window.innerHeight - 300), 
@@ -43,10 +47,10 @@ export default function Menu() {
               item.node.style.zIndex = zIndex.toString();
               setTimeout(() => setDragging(false), 100);
             }}>
-            <MenuItem id={key} title={data.text} clickable={!dragging}></MenuItem>
+            <MenuItem mix={mix} clickable={!dragging}></MenuItem>
           </Rnd>
         ) : (
-          <MenuItem key={key} id={key} title={data.text}></MenuItem>
+          <MenuItem key={mix.key} mix={mix}></MenuItem>
         );
       })}
       </div>

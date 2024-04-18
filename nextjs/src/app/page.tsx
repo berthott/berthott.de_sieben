@@ -1,21 +1,21 @@
-'use client';
-
 import { MixPage } from '@components/MixPage';
 import { NavBar } from '@components/NavBar';
-import { dummy_data } from './dummy_data';
 import PicturePage from '@components/PicturePage/PicturePage.component';
 import { Player } from '@components/Player';
+import { DirectusHelper, assetsUrl } from '@directus/directus.helpers';
 
-export default function Home() {
+export default async function Home() {
+  const mixes = await DirectusHelper.instance().loadMixes();
+  const global = await DirectusHelper.instance().loadGlobal();
   return (
     <>
-      <NavBar/>
+      <NavBar mixes={mixes}/>
       <div className="border"/>
       <div className="pages">
-        <PicturePage id='boot'/>
-        { Object.keys(dummy_data).map(id => <MixPage id={id} data={dummy_data[id]} key={id}/>) }
+        <PicturePage src={assetsUrl(global.cover_image)} alt={global.title || ''}/>
+        { mixes.map(mix => <MixPage id={mix.key} mix={mix} key={mix.key}/>) }
       </div>
-      <Player/>
+      <Player mixes={mixes}/>
     </>
   );
 }

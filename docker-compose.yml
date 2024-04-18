@@ -61,6 +61,7 @@ services:
       DB_DATABASE:
       DB_USER:
       DB_PASSWORD:
+     #DB_SSL__REJECT_UNAUTHORIZED: 'false'
       PUBLIC_URL:
 
       CACHE_ENABLED: 'true'

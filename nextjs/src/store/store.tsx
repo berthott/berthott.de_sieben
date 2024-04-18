@@ -1,6 +1,6 @@
 import { menuReducer } from '@components/Menu/Menu.state';
 import { playerReducer } from '@components/Player/Player.state';
-import { mixesReducer } from '@directus/mixes.store';
+import { mixesReducer } from '@directus/mix.store';
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 

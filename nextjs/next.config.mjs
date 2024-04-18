@@ -2,6 +2,15 @@
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'directus.syspons.local',
+        pathname: '/assets/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

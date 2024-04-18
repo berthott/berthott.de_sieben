@@ -8,14 +8,19 @@ import SearchIcon from '@mui/icons-material/Search';
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import WindowIcon from '@mui/icons-material/Window';
 import CloseIcon from '@mui/icons-material/Close';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { Fade } from '@components/Fade';
 import { useAppDispatch, useAppSelector } from '@store/store';
+import { Mixes } from '@directus/mix.model';
 
 let lastScrollTop = 0;
 
-export default function NavBar() {
+export type MenuProps = {
+  mixes: Mixes;
+};
+
+export default function NavBar(props: MenuProps) {
   const menu = useAppSelector(state => state.menu);
   const dispatch = useAppDispatch();
 
@@ -70,7 +75,7 @@ export default function NavBar() {
         <span className='grow'></span>
         <span className={`${styles.title} ${titleTwice ? styles.twice : ''}`}>berthott</span>
       </nav>
-      <Menu/>
+      <Menu {...props}/>
     </div>
   );
 };

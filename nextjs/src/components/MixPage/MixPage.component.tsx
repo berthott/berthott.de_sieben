@@ -1,25 +1,26 @@
 'use client';
 
-import { MixData } from '@app/dummy_data';
 import styles from '@components/MixPage/MixPage.module.css';
 import Image from 'next/image';
 import { PropsWithChildren, useContext } from 'react';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { useAppDispatch } from '@store/store';
 import { playerActions } from '@components/Player/Player.state';
+import { Mix } from '@directus/mix.model';
+import { assetsUrl } from '@directus/directus.helpers';
 
 export type MixPageProps = PropsWithChildren<{
   id: string;
-  data: MixData;
+  mix: Mix;
 }>;
 
-export default function MixPage({id, data}: MixPageProps) {
+export default function MixPage({id, mix}: MixPageProps) {
   const dispatch = useAppDispatch();
   return (
     <section className={styles.page} id={id}>
       <Image 
         className={styles.img} 
-        src={`/images/${id}.jpg`} 
+        src={assetsUrl(mix.image)} 
         alt={id} 
         width={0}
         height={0} 
@@ -35,16 +36,14 @@ export default function MixPage({id, data}: MixPageProps) {
         </div>
         <div className={styles.title_container}>
           <div className={styles.title}>
-            <h2>{data.text}</h2>
-            <h3>{data.date}</h3>
+            <h2>{mix.title}</h2>
+            <h3>{mix.release}</h3>
           </div>
         </div>
 
         <div className={styles.tracklist_container}>
           <div className={styles.tracklist}>
-            <ul>
-              {data.tracklist.map((track, i) => <li key={`${id}_tracklist_${i}`}>{track}</li>)}
-            </ul>
+            {mix.tracklist}
           </div>
         </div>
       </div>
