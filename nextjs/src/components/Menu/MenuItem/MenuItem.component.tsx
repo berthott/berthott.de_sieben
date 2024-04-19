@@ -37,6 +37,7 @@ export default function MenuItem({ mix, clickable = true }: MenuItemProps) {
         />
       <div className={styles.hover}>
         <p className={styles.title}>{mix.title}</p>
+        <p className={styles.release}>{mix.release}</p>
       </div>
     </div>
   );

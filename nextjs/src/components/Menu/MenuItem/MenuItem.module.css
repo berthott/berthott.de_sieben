@@ -25,18 +25,30 @@
         opacity-100
         bg-black/50
         text-white
-        text-3xl
         text-center
         flex-col
         content-center;  
-      
-      p::first-line {
-        @apply 
-          underline
-          underline-offset-[.4rem];
-      }
+
     }
     
 
+  }
+
+  .title {
+    @apply
+      text-3xl
+      underline
+      underline-offset-[.4rem];
+    
+    /* &::first-line {
+      @apply 
+        underline
+        underline-offset-[.4rem];
+    } */ 
+  }
+
+  .release {
+    @apply
+      pt-1;
   }
 }
