@@ -14,6 +14,10 @@ export function assetsUrl(path?: string | DirectusFiles | null): string {
   return `${apiUrl}/assets/${path}`;
 }
 
+export function downloadUrl(path?: string | DirectusFiles | null): string {
+  return `${assetsUrl(path)}?download`;
+}
+
 export class DirectusHelper {
 
   private main?: Promise<Global>;

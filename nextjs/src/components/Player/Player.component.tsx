@@ -8,10 +8,11 @@ import { Fade } from '@components/Fade';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import DownloadIcon from '@mui/icons-material/Download';
 import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mixes, getMixByKey } from '@directus/mix.model';
-import { assetsUrl } from '@directus/directus.helpers';
+import { assetsUrl, downloadUrl } from '@directus/directus.helpers';
 import { useEffect, useState } from 'react';
 import usePlayer from './Player.hook';
 import Slider from '@mui/material/Slider';
@@ -89,6 +90,9 @@ export default function Player({ mixes }: PlayerProps) {
       <button onClick={() => document.querySelector(`#${player.currentlyPlaying}_tracklist`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })}>
         <QueueMusicIcon style={{fontSize: 60}}/>
       </button>
+      <a href={downloadUrl(mix.audio)}>
+        <DownloadIcon style={{fontSize: 40}}/>
+      </a>
       <button onClick={event => setPopoverAnchor(event.currentTarget)}>
         <VolumeUpIcon style={{fontSize: 40}}/>
       </button>
