@@ -28,7 +28,8 @@
 
 .waveform {
   @apply
-    flex-grow;
+    flex-grow
+    flex-col;
 
   .duration {
     @apply

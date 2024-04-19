@@ -7,12 +7,15 @@ import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import { Fade } from '@components/Fade';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mixes, getMixByKey } from '@directus/mix.model';
 import { assetsUrl } from '@directus/directus.helpers';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import usePlayer from './Player.hook';
+import Slider from '@mui/material/Slider';
+import { Popover, useTheme } from '@mui/material';
 
 export type PlayerProps = {
   mixes: Mixes;
@@ -23,15 +26,51 @@ export default function Player({ mixes }: PlayerProps) {
   const dispatch = useAppDispatch();
   const mix = getMixByKey(mixes, player.currentlyPlaying!);
 
+  const [audioSliderValue, setAudioSliderValue] = useState<number | null>(null);
+  const [popoverAnchor, setPopoverAnchor] = useState<HTMLButtonElement | null>(null);
+  const theme = useTheme();
+  const sliderStyle = {
+    color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
+    '& .MuiSlider-thumb': {
+      width: 8,
+      height: 8,
+      '&::before': {
+        boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
+      },
+      '&:hover, &.Mui-focusVisible': {
+        boxShadow: `0px 0px 0px 8px ${
+          theme.palette.mode === 'dark'
+            ? 'rgb(255 255 255 / 16%)'
+            : 'rgb(0 0 0 / 16%)'
+        }`,
+      },
+      '&.Mui-active': {
+        width: 20,
+        height: 20,
+      },
+    },
+    '& .MuiSlider-rail': {
+      opacity: 0.28,
+    },
+  };
+
   const {
     audioInitialized,
+    duration,
     durationString,
+    currentTime,
     currentTimeString,
     playing,
     isCurrentSrc,
     play,
+    setVolume,
+    setPlayPosition,
+    durationToString,
   } = usePlayer();
 
+  if (audioSliderValue === currentTime) {
+    setAudioSliderValue(null);
+  }
 
   useEffect(() => {
     if (audioInitialized && mix) {
@@ -50,8 +89,42 @@ export default function Player({ mixes }: PlayerProps) {
       <button onClick={() => document.querySelector(`#${player.currentlyPlaying}_tracklist`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })}>
         <QueueMusicIcon style={{fontSize: 60}}/>
       </button>
+      <button onClick={event => setPopoverAnchor(event.currentTarget)}>
+        <VolumeUpIcon style={{fontSize: 40}}/>
+      </button>
+      <Popover
+        id='volume'
+        open={Boolean(popoverAnchor)}
+        anchorEl={popoverAnchor}
+        onClose={() => setPopoverAnchor(null)}
+        anchorOrigin={{
+          vertical: -28,
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        classes={{ paper: styles.volume_popover }}>
+        <Slider 
+          orientation='vertical' 
+          defaultValue={100}
+          onChange={(_, value) => setVolume(value as number / 100)}
+          sx={{
+            height: '90%',
+            ...sliderStyle
+          }}/>
+      </Popover>
       <div className={styles.waveform}>
         <span className={styles.title}>{mix.title}</span> <span className={styles.duration}>{`${currentTimeString} / ${durationString}`}</span>
+        <Slider 
+          value={audioSliderValue !== null ? audioSliderValue : currentTime}
+          onChange={(_, value) => setAudioSliderValue(value as number)}
+          onChangeCommitted={(_, value) => setPlayPosition(value as number)}
+          valueLabelDisplay='auto'
+          valueLabelFormat={value => durationToString(value as number)}
+          max={duration}
+          sx={sliderStyle}/>
       </div>
       <button onClick={() => play(!playing)}>
         <Fade in={!playing} states={{

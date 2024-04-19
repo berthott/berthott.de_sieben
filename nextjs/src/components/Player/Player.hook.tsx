@@ -33,6 +33,18 @@ export default function usePlayer() {
     };
   }
 
+  const setVolume = (volume: number) => {
+    if (audio.current) {
+      audio.current.volume = volume;
+    }
+  }
+
+  const setPlayPosition = (position: number) => {
+    if (audio.current) {
+      audio.current.currentTime = position;
+    }
+  }
+
   const isCurrentSrc = (src: string) => {
     return audio.current?.currentSrc === src;
   }
@@ -71,10 +83,15 @@ export default function usePlayer() {
 
   return {
     audioInitialized,
+    duration,
     durationString,
+    currentTime,
     currentTimeString,
     playing: playing.current,
     isCurrentSrc,
     play,
+    setVolume,
+    setPlayPosition,
+    durationToString,
   }
 }
