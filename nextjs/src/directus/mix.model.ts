@@ -10,6 +10,10 @@ export function initializeMix(mix: DirectusMixes): Mix {
   return {
     ...mix,
     key: mix.title ? mix.title.toLowerCase().replace(/ /g, '_').replace(/[^a-z0-9-_]/g, ''): mix.id.toString(),
+    ...( mix.release ? {release: new Intl.DateTimeFormat('en-US', {
+      year: "numeric",
+      month: "long",
+    }).format(new Date(mix.release))} : {}),
   };
 }
 
