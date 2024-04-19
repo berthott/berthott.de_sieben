@@ -24,7 +24,8 @@ export default function MixPage({id, mix}: MixPageProps) {
         alt={id} 
         width={0}
         height={0} 
-        sizes="100vw" style={{
+        sizes="100vw" 
+        style={{
           width: '100%',
           height: '100vh',
         }}/>

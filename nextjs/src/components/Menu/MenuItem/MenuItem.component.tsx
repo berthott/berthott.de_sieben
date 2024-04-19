@@ -27,8 +27,14 @@ export default function MenuItem({ mix, clickable = true }: MenuItemProps) {
         className={styles.image} 
         src={assetsUrl(mix.image)} 
         alt={mix.title || 'preview'} 
-        width={300} 
-        height={300} 
+        width={0}
+        height={0}
+        sizes='100%'
+        style={{
+          position: 'relative',
+          width: 300,
+          height: 300,
+        }}
         />
       <div className={styles.hover}>
         <p className={styles.title}>{mix.title}</p>
