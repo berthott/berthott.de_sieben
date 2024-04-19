@@ -1,8 +1,16 @@
 import { Mixes as DirectusMixes } from './directus';
 
+export type Track = {
+  title: string;
+  artist: string;
+  time?: string;
+}
+
+export type Tracklist = Track[];
+
 export type Mix = DirectusMixes & {
   key: string;
-  parsed_tracklist?: string[];
+  parsed_tracklist?: Tracklist;
 }
 
 export type Mixes = Mix[];
@@ -27,6 +35,16 @@ export function getMixByKey(mixes: Mixes, key: string): Mix | undefined {
   return mixes.find(mix => mix.key === key);
 }
 
-function parseTracklist(tracklist: string): string[] {
-  return tracklist.split('\n');
+function parseTracklist(tracklist: string): Tracklist {
+  const tracks = tracklist.split('\n');
+  const hasTime = tracks.every(track => /^\d/.test(track));
+  return tracks.map(line => {
+    if (hasTime) {
+      const [time, artist, title] = line.split(' - ');
+      return title ? {title, artist, time} : {title: artist, artist, time};
+    } else {
+      const [artist, title] = line.split(' - ');
+      return title ? {title, artist} : {title: artist, artist};
+    }
+  });
 }

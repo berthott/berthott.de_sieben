@@ -11,7 +11,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import DownloadIcon from '@mui/icons-material/Download';
 import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@store/store';
-import { Mixes, getMixByKey } from '@directus/mix.model';
+import { Mixes, Track, getMixByKey } from '@directus/mix.model';
 import { assetsUrl, downloadUrl } from '@directus/directus.helpers';
 import { useEffect, useState } from 'react';
 import usePlayer from './Player.hook';
@@ -67,6 +67,7 @@ export default function Player({ mixes }: PlayerProps) {
     setVolume,
     setPlayPosition,
     durationToString,
+    stringToDuration,
   } = usePlayer();
 
   if (audioSliderValue === currentTime) {
@@ -78,9 +79,28 @@ export default function Player({ mixes }: PlayerProps) {
       const src = assetsUrl(mix.audio);
       if (!isCurrentSrc(src)) {
         play(true, src);
+        dispatch(playerActions.resetPlayingState());
       }
     }
   }, [audioInitialized, mix, play, isCurrentSrc]);
+
+  useEffect(() => {
+    if (audioInitialized && player.playAt) {
+      setPlayPosition(stringToDuration(player.playAt));
+      dispatch(playerActions.resetPlayingState());
+    }
+  }, [audioInitialized, play, player.playAt]);
+
+  const getCurrentTrack = (): Track | null => {
+    if (!mix || !mix.parsed_tracklist || !currentTime || !mix.parsed_tracklist[0].time) {
+      return null;
+    }
+
+    const currentTrack = mix.parsed_tracklist?.findLast(track => stringToDuration(track.time as string) <= currentTime);
+    return currentTrack || mix.parsed_tracklist?.[0];
+  }
+
+  const currentTrack = getCurrentTrack();
 
   return (
     mix && <div className={`${styles.player} ${!player.show ? styles.slide_out : ''}`}>
@@ -120,7 +140,12 @@ export default function Player({ mixes }: PlayerProps) {
           }}/>
       </Popover>
       <div className={styles.waveform}>
-        <span className={styles.title}>{mix.title}</span> <span className={styles.duration}>{`${currentTimeString} / ${durationString}`}</span>
+        <span className={styles.title}>{mix.title}</span> 
+        <div className={styles.waveform_meta}>
+          <span className={styles.currentTrack}>{currentTrack ? `${currentTrack.artist} - ${currentTrack.title}` : ''}</span>
+          <span className='grow'></span>
+          <span className={styles.duration}>{`${currentTimeString} / ${durationString}`}</span>
+        </div>
         <Slider 
           value={audioSliderValue !== null ? audioSliderValue : currentTime}
           onChange={(_, value) => setAudioSliderValue(value as number)}

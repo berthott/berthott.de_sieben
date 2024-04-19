@@ -70,8 +70,25 @@
       p-10
       pt-0
       bg-white
-      text-center
-      w-6/12;
+      w-6/12
+      text-right;
+    
+    .track {
+      @apply
+        flex-col
+        p-1
+        px-2;
+
+      &:hover {
+        @apply
+          bg-gray-100;
+      }
+
+      .artist {
+        @apply
+        font-bold;
+      }
+    }
   }
   
   .title {

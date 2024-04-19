@@ -3,6 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 export type PlayerState = {
   show: boolean;
   currentlyPlaying?: string;
+  playAt?: string;
 };
 
 export const initialPlayerState: PlayerState = {
@@ -29,10 +30,16 @@ const playerSlice = createSlice({
         payload: !hide ?? true,
       }),
     },
-    play: (state, action: PayloadAction<string>) => {
+    play: (state, action: PayloadAction<{currentlyPlaying: string, playAt?: string}>) => {
       state.show = true;
-      state.currentlyPlaying = action.payload;
+      state.currentlyPlaying = action.payload.currentlyPlaying;
+      if (action.payload.playAt) {
+        state.playAt = action.payload.playAt;
+      }
     },
+    resetPlayingState: state => {
+      state.playAt = undefined;
+    }
   }
 });
 

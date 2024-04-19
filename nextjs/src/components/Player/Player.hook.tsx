@@ -3,10 +3,17 @@
 import { useEffect, useRef, useState } from 'react';
 
 const durationToString = (duration: number): string => {
-  const minutes = Math.floor(duration / 60);
+  const hours = Math.floor(duration / 3600);
+  const minutes = Math.floor((duration % 3600) / 60);
   const seconds = Math.floor(duration % 60);
   const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-  return `${minutes}:${returnedSeconds}`;
+  const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  return `${hours}:${returnedMinutes}:${returnedSeconds}`;
+}
+
+const stringToDuration = (s: string): number => {
+  const [hours, minutes, seconds] = s.split(':').map(Number);
+  return hours * 3600 + minutes * 60 + seconds;
 }
 
 export default function usePlayer() {
@@ -15,9 +22,9 @@ export default function usePlayer() {
   const playing = useRef(false);
   const [audioInitialized, setAudioInitialized] = useState(false);
   const [duration, setDuration] = useState(0);
-  const [durationString, setDurationString] = useState('0:00');
+  const [durationString, setDurationString] = useState('0:00:00');
   const [currentTime, setCurrentTime] = useState(0);
-  const [currentTimeString, setCurrentTimeString] = useState('0:00');
+  const [currentTimeString, setCurrentTimeString] = useState('0:00:00');
 
   const play = (state: boolean = true, src?: string) => {
     playing.current = state;
@@ -93,5 +100,6 @@ export default function usePlayer() {
     setVolume,
     setPlayPosition,
     durationToString,
+    stringToDuration,
   }
 }

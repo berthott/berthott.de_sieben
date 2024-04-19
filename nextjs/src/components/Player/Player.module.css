@@ -31,9 +31,23 @@
     flex-grow
     flex-col;
 
+  .waveform_meta {
+    @apply
+      flex
+      flex-row
+      items-center
+      gap-[10px];
+  }
+
   .duration {
     @apply
       text-xs
       text-gray-500;
+  }
+
+  .currentTrack {
+    @apply
+      h-2
+      text-xs;
   }
 }

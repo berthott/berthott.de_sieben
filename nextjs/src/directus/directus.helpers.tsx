@@ -3,7 +3,9 @@ import { CustomDirectusTypes, DirectusFiles, Mixes as DirectusMixes, Global } fr
 import { Mixes, initializeMixes } from './mix.model';
 
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL as string;
-const client = createDirectus<CustomDirectusTypes>(apiUrl).with(rest());
+const client = createDirectus<CustomDirectusTypes>(apiUrl).with(rest({
+  onRequest: (options) => ({ ...options, cache: 'no-store' }),
+}));
 
 
 export function assetsUrl(path?: string | DirectusFiles | null): string {

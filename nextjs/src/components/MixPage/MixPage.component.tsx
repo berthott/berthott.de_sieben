@@ -31,7 +31,7 @@ export default function MixPage({id, mix}: MixPageProps) {
         }}/>
       <div id={`${id}_tracklist`}>
         <div className={styles.play_container}>
-          <button className={styles.play} onClick={() => dispatch(playerActions.play(id))}>
+          <button className={styles.play} onClick={() => dispatch(playerActions.play({ currentlyPlaying: id }))}>
             <PlayArrowRoundedIcon  style={{fontSize: 200}}/>
           </button>
         </div>
@@ -45,7 +45,14 @@ export default function MixPage({id, mix}: MixPageProps) {
         <div className={styles.tracklist_container}>
           <div className={styles.tracklist}>
             <ul>
-              {mix.parsed_tracklist?.map((track, i) => <li key={`${id}_tracklist_${i}`}>{track}</li>)}
+              {mix.parsed_tracklist?.map((track, i) => 
+                <li 
+                  key={`${id}_tracklist_${i}`}
+                  className={`${styles.track} ${track.time ? 'cursor-pointer' : ''}`} 
+                  onClick={() => track.time ? dispatch(playerActions.play({ currentlyPlaying: id, playAt: track.time })) : undefined}>
+                    <div className={styles.artist}>{track.artist}</div>
+                    <div className={styles.track_title}>{track.title}</div>
+                </li>)}
             </ul>
           </div>
         </div>
