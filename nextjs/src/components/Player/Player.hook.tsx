@@ -12,24 +12,25 @@ const durationToString = (duration: number): string => {
 export default function usePlayer() {
 
   const audio = useRef<HTMLAudioElement>();
+  const playing = useRef(false);
   const [audioInitialized, setAudioInitialized] = useState(false);
   const [duration, setDuration] = useState(0);
   const [durationString, setDurationString] = useState('0:00');
   const [currentTime, setCurrentTime] = useState(0);
   const [currentTimeString, setCurrentTimeString] = useState('0:00');
-  const [playing, setPlaying] = useState(false);
 
   const play = (state: boolean = true, src?: string) => {
+    playing.current = state;
     if (audio.current) {
       if (src && audio.current.currentSrc !== src) {
         console.log('src changed')
         audio.current.src = src;
         audio.current.load();
+      } else {
+        state ? audio.current.play() : audio.current.pause();
+        console.log('play called')
       }
-      state ? audio.current.play() : audio.current.pause();
-      console.log('play called')
-    }
-    setPlaying(state);
+    };
   }
 
   const isCurrentSrc = (src: string) => {
@@ -57,6 +58,12 @@ export default function usePlayer() {
           setCurrentTimeString(durationToString(audio.current.currentTime));
         }
       }
+      audio.current.onloadeddata = () => {
+        console.log('onLoad called', audio.current, playing)
+        if (audio.current && playing.current) {
+          audio.current.play();
+        }
+      }
       setAudioInitialized(true);
     } 
 
@@ -66,7 +73,7 @@ export default function usePlayer() {
     audioInitialized,
     durationString,
     currentTimeString,
-    playing,
+    playing: playing.current,
     isCurrentSrc,
     play,
   }
