@@ -1,4 +1,4 @@
-import { createDirectus, rest, readItems, readItem, SingletonCollections } from '@directus/sdk';
+import { createDirectus, rest, readItems, readItem, SingletonCollections, utilitySort } from '@directus/sdk';
 import { CustomDirectusTypes, DirectusFiles, Mixes as DirectusMixes, Global } from './directus';
 import { Mixes, initializeMixes } from './mix.model';
 
@@ -44,7 +44,9 @@ export class DirectusHelper {
       readItems('mixes')
     ) as any as Promise<DirectusMixes[]>;
   
-    return this.mixes = result.then((mixes: DirectusMixes[]) => initializeMixes(mixes));
+    return this.mixes = result
+      .then((mixes: DirectusMixes[]) => mixes.sort((a, b) => new Date(b.release!).getTime() - new Date(a.release!).getTime()))
+      .then((mixes: DirectusMixes[]) => initializeMixes(mixes));
   }
 
   async loadGlobal(): Promise<Global> {
