@@ -31,7 +31,6 @@ export default function MenuItem({ mix, clickable = true }: MenuItemProps) {
         height={0}
         sizes='100%'
         style={{
-          position: 'relative',
           width: 300,
           height: 300,
         }}
