@@ -2,6 +2,7 @@ import { Mixes as DirectusMixes } from './directus';
 
 export type Mix = DirectusMixes & {
   key: string;
+  parsed_tracklist?: string[];
 }
 
 export type Mixes = Mix[];
@@ -14,6 +15,7 @@ export function initializeMix(mix: DirectusMixes): Mix {
       year: "numeric",
       month: "long",
     }).format(new Date(mix.release))} : {}),
+    ...( mix.tracklist ? {parsed_tracklist: parseTracklist(mix.tracklist)} : {}),
   };
 }
 
@@ -23,4 +25,8 @@ export function initializeMixes(mixes: DirectusMixes[]): Mixes {
 
 export function getMixByKey(mixes: Mixes, key: string): Mix | undefined {
   return mixes.find(mix => mix.key === key);
+}
+
+function parseTracklist(tracklist: string): string[] {
+  return tracklist.split('\n');
 }

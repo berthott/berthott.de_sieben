@@ -44,7 +44,9 @@ export default function MixPage({id, mix}: MixPageProps) {
 
         <div className={styles.tracklist_container}>
           <div className={styles.tracklist}>
-            {mix.tracklist}
+            <ul>
+              {mix.parsed_tracklist?.map((track, i) => <li key={`${id}_tracklist_${i}`}>{track}</li>)}
+            </ul>
           </div>
         </div>
       </div>
