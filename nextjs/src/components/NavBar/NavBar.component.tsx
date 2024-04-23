@@ -13,6 +13,7 @@ import _ from 'lodash';
 import { Fade } from '@components/Fade';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mixes } from '@directus/mix.model';
+import { searchActions } from '@components/Search/Search.store';
 
 let lastScrollTop = 0;
 
@@ -67,12 +68,14 @@ export default function NavBar(props: MenuProps) {
             b: <CloseIcon style={{fontSize: 60}}/>,
           }}/>
         </button>  
-        <button onClick={() => dispatch(menuActions.toggleLayerGridStyle())}>
-          <Fade in={menu.show} states={{
-            a: <SearchIcon style={{fontSize: 50}}/>,
-            b: <StyleIcon style={{fontSize: 50}}/>,
-          }}/>
-        </button>
+        <Fade in={menu.show} states={{
+          a: (<button onClick={() => dispatch(searchActions.show())}>
+                <SearchIcon style={{fontSize: 50}}/>
+              </button>),
+          b: (<button onClick={() => dispatch(menuActions.toggleLayerGridStyle())}>
+              <StyleIcon style={{fontSize: 50}}/>
+            </button>),
+        }}/>
         <span className='grow'></span>
         <span className={`${styles.title} ${titleTwice ? styles.twice : ''}`}>berthott</span>
       </nav>

@@ -1,5 +1,6 @@
 import { menuReducer } from '@components/Menu/Menu.state';
 import { playerReducer } from '@components/Player/Player.state';
+import { searchReducer } from '@components/Search/Search.store';
 import { mixesReducer } from '@directus/mix.store';
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, useStore } from 'react-redux';
@@ -9,6 +10,7 @@ export const makeStore = () => configureStore({
     menu: menuReducer,
     player: playerReducer,
     mixes: mixesReducer,
+    search: searchReducer,
   },
 });
 
