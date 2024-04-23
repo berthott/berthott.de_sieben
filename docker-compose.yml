@@ -71,7 +71,7 @@ services:
 
       CORS_ENABLED: 'true'
 
-      WEBSOCKETS_ENABLED: true
+      WEBSOCKETS_ENABLED: 'true'
     networks:
       - internal
       - web
