@@ -15,7 +15,7 @@ RUN \
   fi
 
 COPY src ./src
-COPY public ./public
+#COPY public ./public
 COPY next.config.mjs .
 COPY postcss.config.js .
 COPY tailwind.config.ts .
