@@ -46,7 +46,7 @@ services:
       - ./directus/uploads:/directus/uploads
       - ./directus/extensions:/directus/extensions
     depends_on:
-      - cache
+      - redis
       - db
     environment:
       KEY: 'cMFzFNq9CxQJFADhsKcrRfGjsSFF6JfPzABRqAnrXWu6tBgeaw'
