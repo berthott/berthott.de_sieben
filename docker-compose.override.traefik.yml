@@ -15,7 +15,7 @@ services:
       - traefik.http.routers.directus.rule=Host(`admin.berthott.de`)
       - traefik.http.routers.directus.tls=true
       - traefik.http.routers.directus.tls.certresolver=lets-encrypt
-      - traefik.http.routers.directus.middlewares=basic-auth@file
+      - traefik.http.services.directus.loadbalancer.server.port=8055
 
   berthott:
     labels:
