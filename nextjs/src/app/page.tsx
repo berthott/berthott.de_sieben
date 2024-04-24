@@ -11,11 +11,11 @@ export default async function Home() {
   return (
     <>
       <NavBar mixes={mixes}/>
-      <Search/>
+      <Search mixes={mixes}/>
       <div className="border"/>
       <div className="pages">
         <PicturePage src={assetsUrl(global.cover_image)} alt={global.title || ''}/>
-        { mixes.map(mix => <MixPage id={mix.key} mix={mix} key={mix.key}/>) }
+        { mixes.map(mix => <MixPage mix={mix} key={mix.key}/>) }
       </div>
       <Player mixes={mixes}/>
     </>
