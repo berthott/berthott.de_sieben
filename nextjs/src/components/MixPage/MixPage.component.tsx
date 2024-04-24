@@ -30,7 +30,7 @@ export default function MixPage({mix}: MixPageProps) {
         }}/>
       <div id={`${mix.key}_tracklist`}>
         <div className={styles.play_container}>
-          <button className={styles.play} onClick={() => dispatch(playerActions.play({ currentlyPlaying: mix.key }))}>
+          <button className={styles.play} onClick={() => dispatch(playerActions.play({ currentlyPlaying: mix.key, playAt: '0:00:00' }))}>
             <PlayArrowRoundedIcon  style={{fontSize: 200}}/>
           </button>
         </div>

@@ -21,7 +21,6 @@ type Result = {
 export default function Search({ mixes }: SearchProps) {
   const search = useAppSelector(state => state.search);
   const dispatch = useAppDispatch();
-  console.log('search', search);
   const results = mixes.reduce((r, mix) => {
     const found = search.search.length && mix.parsed_tracklist?.map(track => 
       ({ track, mix })).filter(({ track }) => `${track.artist} ${track.title}`.toLowerCase().includes(search.search.toLowerCase()));

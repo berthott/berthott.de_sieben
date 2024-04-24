@@ -87,6 +87,9 @@ export default function Player({ mixes }: PlayerProps) {
   useEffect(() => {
     if (audioInitialized && player.playAt) {
       setPlayPosition(stringToDuration(player.playAt));
+      if (!playing) {
+        play();
+      }
       dispatch(playerActions.resetPlayingState());
     }
   }, [audioInitialized, play, player.playAt]);
@@ -104,7 +107,10 @@ export default function Player({ mixes }: PlayerProps) {
 
   return (
     mix && <div className={`${styles.player} ${!player.show ? styles.slide_out : ''}`}>
-      <button onClick={() => dispatch(playerActions.hide())}>
+      <button onClick={() => {
+          dispatch(playerActions.hide());
+          play(false);
+        }}>
         <CloseIcon style={{fontSize: 60}}/>
       </button>
       <button onClick={() => document.querySelector(`#${player.currentlyPlaying}_tracklist`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })}>
