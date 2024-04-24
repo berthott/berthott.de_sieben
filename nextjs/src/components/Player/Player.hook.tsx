@@ -56,6 +56,7 @@ export default function usePlayer() {
     return audio.current?.currentSrc === src;
   }
 
+  // Initialize audio
   useEffect(() => {
     console.log('useEffect called')
 
@@ -87,6 +88,25 @@ export default function usePlayer() {
     } 
 
   }, [audioInitialized]);
+
+  // Space key to play/pause
+  useEffect(() => {
+    const onSpace = (e: KeyboardEvent) => {
+      if (document.activeElement?.nodeName.toLowerCase() === 'input') {
+        console.log('input focused')
+        return;
+      }
+
+      if (e.code === 'Space') {
+        console.log('space pressed')
+        e.preventDefault();
+        play(!playing.current);
+      }
+    }
+
+    window.addEventListener('keydown', onSpace);
+    return () => window.removeEventListener('keydown', onSpace);
+  }, []);
 
   return {
     audioInitialized,
