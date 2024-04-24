@@ -5,8 +5,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'directus.syspons.local',
+        protocol: process.env.NEXT_PUBLIC_BACKEND_URL.match(/^[^:]+/)[0],
+        hostname: process.env.NEXT_PUBLIC_BACKEND_URL.match(/([^\/]+$)/)[0],
         pathname: '/assets/**',
       },
     ],

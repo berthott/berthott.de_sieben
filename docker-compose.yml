@@ -84,8 +84,6 @@ services:
     volumes:
       - ./nextjs/src:/app/src
       - ./nextjs/public:/app/public
-    environment:
-      NEXT_ENV:
     networks:
       - internal
       - web
