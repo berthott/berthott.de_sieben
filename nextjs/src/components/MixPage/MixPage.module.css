@@ -75,13 +75,13 @@
     
     .track {
       @apply
-        flex-col
+        flex
         p-1
         px-2;
 
       &:hover {
         @apply
-          bg-gray-100;
+          bg-black/10;
       }
 
       .artist {
