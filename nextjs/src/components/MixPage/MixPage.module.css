@@ -26,20 +26,6 @@
         col-start-1
         row-start-1;
     }
-
-    .play {
-      @apply
-      text-white
-        opacity-90
-        z-20;
-
-      &:hover {
-        @apply
-          scale-90
-          opacity-100
-          transition-all;
-      }
-    }
   }
 
   .title_container {
@@ -70,7 +56,9 @@
       p-10
       pt-0
       bg-white
-      w-6/12
+      w-full
+      lg:w-6/12
+      xl:w-5/12
       text-right;
     
     .track {
@@ -93,9 +81,11 @@
   
   .title {
     @apply
-      absolute
-      bottom-0
-      w-6/12
+      lg:absolute
+      lg:bottom-0
+      w-full
+      lg:w-6/12
+      xl:w-5/12
       p-10
       pb-[calc(2.5rem+10px)]
       bg-white
@@ -115,6 +105,14 @@
             my-4
             bg-black;
         }
+    }
+
+    .play {
+      @apply
+        px-2
+        pt-5
+        text-left
+        w-full;
     }
   }
 }
