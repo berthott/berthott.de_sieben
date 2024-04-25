@@ -30,7 +30,7 @@ body {
   @apply 
     flex 
     flex-col 
-    divide-y-10 
+    divide-y-[10px] 
     border-white;
 
   > * {
@@ -47,7 +47,7 @@ body {
     left-0
     right-0
     bottom-0
-    border-10
+    border-[10px]
     border-white
     pointer-events-none
     z-50;

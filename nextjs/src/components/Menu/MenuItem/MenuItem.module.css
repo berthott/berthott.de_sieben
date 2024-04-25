@@ -1,4 +1,4 @@
-.mix {
+.item {
   @apply
     z-30
     grid
@@ -51,4 +51,32 @@
     @apply
       pt-1;
   }
+}
+
+.item_list {
+  @apply
+    relative
+    flex
+    flex-row
+    items-center
+    w-full
+    bg-white
+    border-white
+    px-[10px];
+
+    .text_list {
+      @apply
+        p-2
+        px-4;
+    }
+
+    .title_list {
+      @apply
+        font-bold;
+    }
+
+    .release_list {
+      @apply
+        text-xs;
+    }
 }

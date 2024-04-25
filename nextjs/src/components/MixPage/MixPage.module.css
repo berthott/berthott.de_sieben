@@ -53,7 +53,8 @@
 
   .tracklist {
     @apply
-      p-10
+      p-5
+      md:p-10
       pt-0
       bg-white
       w-full
@@ -86,7 +87,8 @@
       w-full
       lg:w-6/12
       xl:w-5/12
-      p-10
+      p-5
+      md:p-10
       pb-[calc(2.5rem+10px)]
       bg-white
       text-center;

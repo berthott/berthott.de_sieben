@@ -1,7 +1,7 @@
 import styles from '@components/Menu/MenuItem/MenuItem.module.css';
 import Image from 'next/image';
-import { menuActions } from '../Menu.state';
-import { useAppDispatch } from '@store/store';
+import { MenuStyle, menuActions } from '../Menu.state';
+import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mix } from '@directus/mix.model';
 import { assetsUrl } from '@directus/directus.helpers';
 
@@ -12,9 +12,11 @@ type MenuItemProps = {
 
 export default function MenuItem({ mix, clickable = true }: MenuItemProps) {
   const dispatch = useAppDispatch();
+  const menu = useAppSelector(state => state.menu);
+  const list = menu.style === MenuStyle.List;
   return (
     <div 
-        className={styles.mix}
+        className={list ? styles.item_list : styles.item}
         onDragStart={e => e.preventDefault()}
         onClick={() => {
           if (!clickable)
@@ -31,13 +33,13 @@ export default function MenuItem({ mix, clickable = true }: MenuItemProps) {
         height={0}
         sizes='100%'
         style={{
-          width: 300,
-          height: 300,
+          width: list ? 100 : 300,
+          height: list ? 100 : 300,
         }}
         />
-      <div className={styles.hover}>
-        <p className={styles.title}>{mix.title}</p>
-        <p className={styles.release}>{mix.release}</p>
+      <div className={list ? styles.text_list : styles.hover}>
+        <p className={list ? styles.title_list : styles.title}>{mix.title}</p>
+        <p className={list ? styles.release_list : styles.release}>{mix.release}</p>
       </div>
     </div>
   );

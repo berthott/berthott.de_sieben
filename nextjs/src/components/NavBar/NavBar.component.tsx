@@ -14,6 +14,7 @@ import { Fade } from '@components/Fade';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mixes } from '@directus/mix.model';
 import { searchActions } from '@components/Search/Search.store';
+import { useBreakpoints } from '@utils/Breakpoints.hook';
 
 let lastScrollTop = 0;
 
@@ -25,11 +26,13 @@ export default function NavBar(props: MenuProps) {
   const menu = useAppSelector(state => state.menu);
   const dispatch = useAppDispatch();
 
+  const { isMd } = useBreakpoints();
+
   const [titleTwice, setTitleTwice] = useState(false);
   const [slideClass, setSlideClass] = useState<string | undefined>(undefined);
 
   const onScroll = _.throttle(() => {
-    const currentScroll = window.scrollY || document.documentElement.scrollTop;
+    const currentScroll = window.scrollY || document.documentElement?.scrollTop;
     const currentClass = slideClass === undefined ? undefined : slideClass === styles['slide-out'] ? 'slide-out' : 'slide-in';
     let cl = '';
     if (!(currentScroll < 40 && currentClass === 'slide-in')) {
@@ -64,20 +67,20 @@ export default function NavBar(props: MenuProps) {
           onMouseLeave={() => setTitleTwice(true)}>
         <button onClick={() => dispatch(menuActions.show(!menu.show))}>
           <Fade in={menu.show} states={{
-            a: <MenuIcon style={{fontSize: 60}}/>,
-            b: <CloseIcon style={{fontSize: 60}}/>,
+            a: <MenuIcon style={{fontSize: isMd ? 60 : 40}}/>,
+            b: <CloseIcon style={{fontSize: isMd ? 60 : 40}}/>,
           }}/>
         </button>  
         <Fade in={menu.show} states={{
           a: (<button onClick={() => dispatch(searchActions.show())}>
-                <SearchIcon style={{fontSize: 50}}/>
+                <SearchIcon style={{fontSize: isMd ? 50 : 30}}/>
               </button>),
-          b: (<button onClick={() => dispatch(menuActions.toggleLayerGridStyle())}>
-              <StyleIcon style={{fontSize: 50}}/>
-            </button>),
+          b: (menu.style !== MenuStyle.List ? <button onClick={() => dispatch(menuActions.toggleLayerGridStyle())}>
+              <StyleIcon style={{fontSize: isMd ? 50 : 30}}/>
+            </button> : <div></div>),
         }}/>
         <span className='grow'></span>
-        <span className={`${styles.title} ${titleTwice ? styles.twice : ''}`}>berthott</span>
+        <span className={`${styles.title} ${titleTwice || !isMd ? styles.twice : ''}`}>berthott</span>
       </nav>
       <Menu {...props}/>
     </div>

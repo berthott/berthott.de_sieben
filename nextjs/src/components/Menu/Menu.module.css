@@ -22,3 +22,15 @@
   grid-template-columns: repeat(auto-fit, 300px);
   grid-template-rows: repeat(auto-fit, 300px);
 }
+
+.menu_list {
+  @apply
+    w-full
+    h-full
+    pointer-events-auto
+    z-20
+    flex
+    flex-col
+    divide-y-[2px]
+    bg-white;
+}

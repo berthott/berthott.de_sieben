@@ -4,10 +4,11 @@ import styles from '@components/Menu/Menu.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { MenuItem } from './MenuItem';
 import { Rnd } from 'react-rnd';
-import { MenuStyle } from './Menu.state';
+import { MenuStyle, menuActions } from './Menu.state';
 import { Fade } from '@mui/material';
-import { useAppSelector } from '@store/store';
+import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mixes } from '@directus/mix.model';
+import { useBreakpoints } from '@utils/Breakpoints.hook';
 
 export type MenuProps = {
   mixes: Mixes;
@@ -15,6 +16,7 @@ export type MenuProps = {
 
 export default function Menu({ mixes }: MenuProps) {
   const documentRef = useRef<Element | null>(null);
+  const dispatch = useAppDispatch();
   useEffect(() => {
     documentRef.current = document.body;
   }, []);
@@ -23,6 +25,15 @@ export default function Menu({ mixes }: MenuProps) {
   const [dragging, setDragging] = useState(false);
 
   const menu = useAppSelector(state => state.menu);
+
+  const { isMd } = useBreakpoints();
+  useEffect(() => {
+    if (!isMd && menu.style !== MenuStyle.List) {
+      dispatch(menuActions.setListStyle());
+    } else if (isMd && menu.style === MenuStyle.List) {
+      dispatch(menuActions.setLayerStyle());
+    }
+  }, [isMd, menu, dispatch]);
 
   return documentRef.current && (
     <Fade in={menu.show}>

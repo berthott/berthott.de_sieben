@@ -12,9 +12,6 @@ const config: Config = {
         sans: ['var(--font-berthott)']
       },
     },
-    borderWidth: {
-      '10': '10px',
-    },
   },
   plugins: [],
 };
