@@ -23,12 +23,17 @@ type Result = {
 export function Search({ mixes }: SearchProps) {
   const search = useAppSelector(state => state.search);
   const dispatch = useAppDispatch();
+
+  // search for tracks that match the search string
   const results = mixes.reduce((r, mix) => {
     const found = search.search.length && mix.parsed_tracklist?.map(track => 
       ({ track, mix })).filter(({ track }) => `${track.artist} ${track.title}`.toLowerCase().includes(search.search.toLowerCase()));
     return found ? r.concat(found) : r;
   }, [] as Result[])
+
+  // debounce the search input
   const onChange = debounce((e: ChangeEvent<HTMLInputElement>) => dispatch(searchActions.setSearch(e.target.value)), 250);
+  
   return search.show && (
     <div className={styles.search} onClick={() => dispatch(searchActions.hide())}>
       <div className={styles.container}>

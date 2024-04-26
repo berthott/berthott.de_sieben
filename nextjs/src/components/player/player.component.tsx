@@ -32,6 +32,8 @@ export function Player({ mixes }: PlayerProps) {
   const { isMd } = useBreakpoints();
 
   const [audioSliderValue, setAudioSliderValue] = useState<number | null>(null);
+
+  // volume popover
   const [popoverAnchor, setPopoverAnchor] = useState<HTMLButtonElement | null>(null);
   const theme = useTheme();
   const sliderStyle = {
@@ -78,6 +80,7 @@ export function Player({ mixes }: PlayerProps) {
     setAudioSliderValue(null);
   }
 
+  // set new source when mix changes
   useEffect(() => {
     if (audioInitialized && mix) {
       const src = assetsUrl(mix.audio);
@@ -88,6 +91,7 @@ export function Player({ mixes }: PlayerProps) {
     }
   }, [audioInitialized, mix, play, isCurrentSrc, dispatch]);
 
+  // play at specific position
   useEffect(() => {
     if (audioInitialized && player.playAt) {
       setPlayPosition(stringToDuration(player.playAt));
@@ -98,6 +102,7 @@ export function Player({ mixes }: PlayerProps) {
     }
   }, [audioInitialized, play, player.playAt, dispatch, playing, stringToDuration, setPlayPosition, mix, isCurrentSrc]);
 
+  // get the currently played track
   const getCurrentTrack = (): Track | null => {
     if (!mix || !mix.parsed_tracklist || !currentTime || !mix.parsed_tracklist[0].time) {
       return null;
@@ -106,7 +111,9 @@ export function Player({ mixes }: PlayerProps) {
     const currentTrack = mix.parsed_tracklist?.findLast(track => stringToDuration(track.time as string) <= currentTime);
     return currentTrack || mix.parsed_tracklist?.[0];
   }
+  const currentTrack = getCurrentTrack();
 
+  // scroll title if it's too long
   const [scrollDistance, setScrollDistance] = useState(0);
   const metaRef = useCallback((node: HTMLDivElement) => {
     if (node && node.scrollWidth > node.clientWidth) {
@@ -114,12 +121,12 @@ export function Player({ mixes }: PlayerProps) {
     }
   }, []);
 
-  const currentTrack = getCurrentTrack();
 
   const largeIconSize = isMd ? 60 : 40;
   const smallIconSize = isMd ? 40 : 30;
   const imageSize = isMd ? '6rem' : '5rem';
 
+  // reuseable top icons
   const topIcons = (
     <>
       <button onClick={() => {

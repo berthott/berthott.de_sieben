@@ -18,12 +18,13 @@ export type MenuProps = {
 
 export function Menu({ mixes }: MenuProps) {
   const dispatch = useAppDispatch();
+  const menu = useAppSelector(state => state.menu);
 
+  // for layer functionality
   const [zIndex, setZIndex] = useState(31);
   const [dragging, setDragging] = useState(false);
 
-  const menu = useAppSelector(state => state.menu);
-
+  // Set menu style based on screen size
   const { isMd } = useBreakpoints();
   useEffect(() => {
     if (!isMd && menu.style !== MenuStyle.List) {

@@ -21,19 +21,22 @@ export function MixPage({mix}: MixPageProps) {
   const dispatch = useAppDispatch();
   const { isLg } = useBreakpoints();
 
-  const title = 
-  (<div className={styles.title}>
-    <h2>{mix.title}</h2>
-    <h3>{mix.release}</h3>
-    <div className={styles.hud}>
-      <button onClick={() => dispatch(playerActions.play({ currentlyPlaying: mix.key, playAt: '0:00:00' }))}>
-        <PlayArrowIcon />
-      </button>
-      <a href={downloadUrl(mix.audio)}>
-        <DownloadIcon />
-      </a>
+  // reusable title
+  const title = (
+    <div className={styles.title}>
+      <h2>{mix.title}</h2>
+      <h3>{mix.release}</h3>
+      <div className={styles.hud}>
+        <button onClick={() => dispatch(playerActions.play({ currentlyPlaying: mix.key, playAt: '0:00:00' }))}>
+          <PlayArrowIcon />
+        </button>
+        <a href={downloadUrl(mix.audio)}>
+          <DownloadIcon />
+        </a>
+      </div>
     </div>
-  </div>);
+  );
+
   return (
     <section className={styles.page} id={mix.key}>
       <Image 

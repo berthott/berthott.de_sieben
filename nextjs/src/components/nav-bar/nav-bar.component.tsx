@@ -33,6 +33,7 @@ export function NavBar(props: MenuProps) {
   const [titleTwice, setTitleTwice] = useState(false);
   const [slideClass, setSlideClass] = useState<string | undefined>(undefined);
 
+  // throttled slide in/out effect
   const onScroll = _.throttle(() => {
     const currentScroll = window.scrollY || document.documentElement?.scrollTop;
     const currentClass = slideClass === undefined ? undefined : slideClass === styles['slide-out'] ? 'slide-out' : 'slide-in';
