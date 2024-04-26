@@ -2,7 +2,7 @@
 
 import styles from './menu.module.css';
 import { useEffect, useRef, useState } from 'react';
-import { MenuItem } from './MenuItem';
+import { MenuItem } from './menu-item/menu-item.component';
 import { Rnd } from 'react-rnd';
 import { MenuStyle, menuActions } from './menu.store';
 import { Fade } from '@mui/material';

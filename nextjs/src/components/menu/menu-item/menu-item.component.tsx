@@ -1,4 +1,4 @@
-import styles from '@components/menu/MenuItem/MenuItem.module.css';
+import styles from './menu-item.module.css';
 import Image from 'next/image';
 import { MenuStyle, menuActions } from '../menu.store';
 import { useAppDispatch, useAppSelector } from '@store/store';
@@ -10,7 +10,7 @@ type MenuItemProps = {
   clickable?: boolean;
 };
 
-export default function MenuItem({ mix, clickable = true }: MenuItemProps) {
+export function MenuItem({ mix, clickable = true }: MenuItemProps) {
   const dispatch = useAppDispatch();
   const menu = useAppSelector(state => state.menu);
   const list = menu.style === MenuStyle.List;
