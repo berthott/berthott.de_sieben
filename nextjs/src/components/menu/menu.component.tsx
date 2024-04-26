@@ -42,8 +42,8 @@ export function Menu({ mixes }: MenuProps) {
           <Rnd 
             key={mix.key} 
             default={{
-              x: Math.random() * (window.innerWidth - 300), 
-              y: Math.random() * (window.innerHeight - 300), 
+              x: typeof window !== 'undefined' ? Math.random() * (window.innerWidth - 300) : 0, 
+              y: typeof window !== 'undefined' ? Math.random() * (window.innerHeight - 300) : 0, 
               width: 300, 
               height: 300}}
             enableResizing={false}
