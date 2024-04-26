@@ -15,7 +15,8 @@
     flex
     flex-row-reverse
     items-center
-    gap-[18px]
+    gap-[10px]
+    md:gap-[18px]
     px-[20px]
     md:px-[36px]
     h-20
