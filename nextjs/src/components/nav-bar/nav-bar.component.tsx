@@ -1,8 +1,8 @@
 'use client';
 
+import styles from './nav-bar.module.css';
 import { Menu } from '@components/Menu';
 import { MenuStyle, menuActions } from '@components/Menu/Menu.store';
-import styles from '@components/NavBar/NavBar.module.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
@@ -22,7 +22,7 @@ export type MenuProps = {
   mixes: Mixes;
 };
 
-export default function NavBar(props: MenuProps) {
+export function NavBar(props: MenuProps) {
   const menu = useAppSelector(state => state.menu);
   const dispatch = useAppDispatch();
 

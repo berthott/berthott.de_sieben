@@ -1,5 +1,5 @@
 import { MixPage } from '@components/MixPage';
-import { NavBar } from '@components/NavBar';
+import { NavBar } from '@components/nav-bar/nav-bar.component';
 import { PicturePage } from '@components/picture-page/picture-page.component';
 import { Player } from '@components/player/player.component';
 import { Search } from '@components/search/search.component';
