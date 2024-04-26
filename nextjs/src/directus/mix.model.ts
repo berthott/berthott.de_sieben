@@ -37,14 +37,14 @@ export function getMixByKey(mixes: Mixes, key: string): Mix | undefined {
 
 function parseTracklist(tracklist: string): Tracklist {
   const tracks = tracklist.split('\n');
-  const hasTime = tracks.every(track => /^\d/.test(track));
+  const hasTime = tracks.every(track => /\[([0-9:]*?)\]/.test(track));
   return tracks.map(line => {
     if (hasTime) {
-      const [time, artist, title] = line.split(' - ');
+      const [_, time, newLine] = line.split(/\[([0-9:]*?)\]/);
+      const [artist, title] = newLine.split(' - ');
       return title ? {title, artist, time} : {title: artist, artist, time};
-    } else {
-      const [artist, title] = line.split(' - ');
-      return title ? {title, artist} : {title: artist, artist};
-    }
+    } 
+    const [artist, title] = line.split(' - ');
+    return title ? {title, artist} : {title: artist, artist};
   });
 }
