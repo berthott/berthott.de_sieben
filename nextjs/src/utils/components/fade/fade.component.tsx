@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import styles from '@components/Fade/Fade.module.css';
+import styles from '@utils/components/fade/fade.module.css';
 import { Fade as MuiFade, FadeProps as MuiFadeProps } from '@mui/material';
 
 

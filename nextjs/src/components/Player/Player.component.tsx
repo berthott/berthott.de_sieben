@@ -4,7 +4,6 @@ import styles from '@components/Player/Player.module.css';
 import { playerActions } from './Player.state';
 import CloseIcon from '@mui/icons-material/Close';
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
-import { Fade } from '@components/Fade';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -12,11 +11,12 @@ import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mixes, Track, getMixByKey } from '@directus/mix.model';
 import { assetsUrl } from '@directus/directus.helpers';
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import usePlayer from './Player.hook';
 import Slider from '@mui/material/Slider';
 import { Popover, useTheme } from '@mui/material';
 import { useBreakpoints } from '@utils/Breakpoints.hook';
+import Fade from '@utils/components/fade/fade.component';
 
 export type PlayerProps = {
   mixes: Mixes;

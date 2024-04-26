@@ -10,11 +10,11 @@ import WindowIcon from '@mui/icons-material/Window';
 import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { Fade } from '@components/Fade';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mixes } from '@directus/mix.model';
 import { searchActions } from '@components/Search/Search.store';
 import { useBreakpoints } from '@utils/Breakpoints.hook';
+import Fade from '@utils/components/fade/fade.component';
 
 let lastScrollTop = 0;
 
