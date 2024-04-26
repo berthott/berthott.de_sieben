@@ -8,7 +8,8 @@
     h-full
     z-50
     text-white
-    bg-black/60
+    bg-black/80
+    md:bg-black/60
     grid
     place-content-center
     row-start-1;
@@ -18,7 +19,8 @@
 .container {
   @apply
     h-svh
-    p-24
+    pt-20
+    px-4
     flex
     flex-col;
 }
@@ -26,7 +28,8 @@
 .input {
   @apply
     w-full
-    text-5xl
+    text-4xl
+    md:text-5xl
     h-10
     px-4
     py-10
