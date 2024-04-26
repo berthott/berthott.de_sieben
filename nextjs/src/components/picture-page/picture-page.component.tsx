@@ -8,7 +8,7 @@ export type PicturePageProps = PropsWithChildren<{
   priority?: boolean;
 }>;
 
-export default function PicturePage({src, priority, alt = ''}: PicturePageProps) {
+export function PicturePage({src, priority, alt = ''}: PicturePageProps) {
   return (
     <section className={styles.page}>
       <Image 
