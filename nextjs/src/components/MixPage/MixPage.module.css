@@ -109,12 +109,15 @@
         }
     }
 
-    .play {
+    .hud {
       @apply
         px-2
         pt-5
-        text-left
-        w-full;
+        w-full
+        flex
+        flex-row
+        items-start
+        gap-2;
     }
   }
 }
