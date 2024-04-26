@@ -1,5 +1,5 @@
 import { menuReducer } from '@components/Menu/Menu.store';
-import { playerReducer } from '@components/Player/Player.state';
+import { playerReducer } from '@components/player/player.store';
 import { searchReducer } from '@components/search/search.store';
 import { mixesReducer } from '@directus/mix.store';
 import { configureStore } from '@reduxjs/toolkit';

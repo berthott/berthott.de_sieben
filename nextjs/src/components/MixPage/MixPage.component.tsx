@@ -6,7 +6,7 @@ import { PropsWithChildren } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import DownloadIcon from '@mui/icons-material/Download';
 import { useAppDispatch } from '@store/store';
-import { playerActions } from '@components/Player/Player.state';
+import { playerActions } from '@components/player/player.store';
 import { Mix } from '@directus/mix.model';
 import { assetsUrl, downloadUrl } from '@directus/directus.helpers';
 import { useBreakpoints } from '@utils/Breakpoints.hook';

@@ -1,7 +1,7 @@
  'use client';
 
-import styles from '@components/Player/Player.module.css';
-import { playerActions } from './Player.state';
+import styles from './player.module.css';
+import { playerActions } from './player.store';
 import CloseIcon from '@mui/icons-material/Close';
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mixes, Track, getMixByKey } from '@directus/mix.model';
 import { assetsUrl } from '@directus/directus.helpers';
 import { useCallback, useEffect, useState } from 'react';
-import usePlayer from './Player.hook';
+import usePlayer from './player.hook';
 import Slider from '@mui/material/Slider';
 import { Popover, useTheme } from '@mui/material';
 import { useBreakpoints } from '@utils/Breakpoints.hook';
@@ -22,7 +22,7 @@ export type PlayerProps = {
   mixes: Mixes;
 };
 
-export default function Player({ mixes }: PlayerProps) {
+export function Player({ mixes }: PlayerProps) {
   const player = useAppSelector(state => state.player);
   const dispatch = useAppDispatch();
   const mix = getMixByKey(mixes, player.currentlyPlaying!);

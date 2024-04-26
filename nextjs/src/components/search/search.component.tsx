@@ -7,7 +7,7 @@ import { debounce } from 'lodash';
 import { Mix, Mixes, Track } from '@directus/mix.model';
 import { ChangeEvent } from 'react';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import { playerActions } from '@components/Player/Player.state';
+import { playerActions } from '@components/player/player.store';
 
 export type SearchProps = {
   mixes: Mixes;
