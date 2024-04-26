@@ -30,12 +30,10 @@ export default function usePlayer() {
     playing.current = state;
     if (audio.current) {
       if (src && audio.current.currentSrc !== src) {
-        console.log('src changed')
         audio.current.src = src;
         audio.current.load();
       } else {
         state ? audio.current.play() : audio.current.pause();
-        console.log('play called')
       }
     };
   }
@@ -58,28 +56,23 @@ export default function usePlayer() {
 
   // Initialize audio
   useEffect(() => {
-    console.log('useEffect called')
 
     if (!audioInitialized) {
-      console.log('audio init')
       audio.current = new Audio();
       audio.current.preload = 'metadata';
       audio.current.onloadedmetadata = () => {
-        console.log('onLoadMetadata called')
         if (audio.current) {
           setDuration(audio.current.duration);
           setDurationString(durationToString(audio.current.duration));
         }
       }
       audio.current.ontimeupdate = () => {
-        console.log('onTimeUpdate called')
         if (audio.current) {
           setCurrentTime(audio.current.currentTime);
           setCurrentTimeString(durationToString(audio.current.currentTime));
         }
       }
       audio.current.onloadeddata = () => {
-        console.log('onLoad called', audio.current, playing)
         if (audio.current && playing.current) {
           audio.current.play();
         }
@@ -93,12 +86,10 @@ export default function usePlayer() {
   useEffect(() => {
     const onSpace = (e: KeyboardEvent) => {
       if (document.activeElement?.nodeName.toLowerCase() === 'input') {
-        console.log('input focused')
         return;
       }
 
       if (e.code === 'Space') {
-        console.log('space pressed')
         e.preventDefault();
         play(!playing.current);
       }
