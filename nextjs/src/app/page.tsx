@@ -1,4 +1,4 @@
-import { MixPage } from '@components/MixPage';
+import { MixPage } from '@components/mix-page/mix-page.component';
 import { NavBar } from '@components/nav-bar/nav-bar.component';
 import { PicturePage } from '@components/picture-page/picture-page.component';
 import { Player } from '@components/player/player.component';

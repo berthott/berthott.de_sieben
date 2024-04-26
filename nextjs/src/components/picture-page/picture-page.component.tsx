@@ -1,4 +1,4 @@
-import styles from '@components/MixPage/MixPage.module.css';
+import styles from './picture-page.module.css';
 import Image from 'next/image';
 import { PropsWithChildren } from 'react';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '@components/MixPage/MixPage.module.css';
+import styles from './mix-page.module.css';
 import Image from 'next/image';
 import { PropsWithChildren } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -15,7 +15,7 @@ export type MixPageProps = PropsWithChildren<{
   mix: Mix;
 }>;
 
-export default function MixPage({mix}: MixPageProps) {
+export function MixPage({mix}: MixPageProps) {
   const dispatch = useAppDispatch();
   const { isLg } = useBreakpoints();
 
