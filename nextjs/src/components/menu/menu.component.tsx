@@ -17,11 +17,7 @@ export type MenuProps = {
 };
 
 export function Menu({ mixes }: MenuProps) {
-  const documentRef = useRef<Element | null>(null);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    documentRef.current = document.body;
-  }, []);
 
   const [zIndex, setZIndex] = useState(31);
   const [dragging, setDragging] = useState(false);
@@ -37,7 +33,7 @@ export function Menu({ mixes }: MenuProps) {
     }
   }, [isMd, menu, dispatch]);
 
-  return documentRef.current && (
+  return (
     <Fade in={menu.show}>
       <div className={styles[`menu_${menu.style}`]}>
       { mixes.map(mix => {
