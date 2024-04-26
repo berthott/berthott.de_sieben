@@ -14,7 +14,7 @@ export default async function Home() {
       <Search mixes={mixes}/>
       <div className="border"/>
       <div className="pages">
-        <PicturePage src={assetsUrl(global.cover_image)} alt={global.title || ''}/>
+        <PicturePage src={assetsUrl(global.cover_image)} alt={global.title || ''} priority/>
         { mixes.map(mix => <MixPage mix={mix} key={mix.key}/>) }
       </div>
       <Player mixes={mixes}/>

@@ -5,9 +5,10 @@ import { PropsWithChildren } from 'react';
 export type PicturePageProps = PropsWithChildren<{
   src: string;
   alt?: string;
+  priority?: boolean;
 }>;
 
-export default function PicturePage({src, alt = ''}: PicturePageProps) {
+export default function PicturePage({src, priority, alt = ''}: PicturePageProps) {
   return (
     <section className={styles.page}>
       <Image 
@@ -19,7 +20,8 @@ export default function PicturePage({src, alt = ''}: PicturePageProps) {
         sizes="100vw" style={{
           width: '100%',
           height: '100vh',
-        }}/>
+        }}
+        priority/>
     </section>
   );
 }
