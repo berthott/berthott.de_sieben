@@ -4,10 +4,11 @@ import styles from '@components/MixPage/MixPage.module.css';
 import Image from 'next/image';
 import { PropsWithChildren } from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import DownloadIcon from '@mui/icons-material/Download';
 import { useAppDispatch } from '@store/store';
 import { playerActions } from '@components/Player/Player.state';
 import { Mix } from '@directus/mix.model';
-import { assetsUrl } from '@directus/directus.helpers';
+import { assetsUrl, downloadUrl } from '@directus/directus.helpers';
 import { useBreakpoints } from '@utils/Breakpoints.hook';
 
 export type MixPageProps = PropsWithChildren<{
@@ -22,9 +23,14 @@ export default function MixPage({mix}: MixPageProps) {
   (<div className={styles.title}>
     <h2>{mix.title}</h2>
     <h3>{mix.release}</h3>
-    <button className={styles.play} onClick={() => dispatch(playerActions.play({ currentlyPlaying: mix.key, playAt: '0:00:00' }))}>
-      <PlayArrowIcon />
-    </button>
+    <div className={styles.hud}>
+      <button onClick={() => dispatch(playerActions.play({ currentlyPlaying: mix.key, playAt: '0:00:00' }))}>
+        <PlayArrowIcon />
+      </button>
+      <a href={downloadUrl(mix.audio)}>
+        <DownloadIcon />
+      </a>
+    </div>
   </div>);
   return (
     <section className={styles.page} id={mix.key}>
