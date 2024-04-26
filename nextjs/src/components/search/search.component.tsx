@@ -1,8 +1,8 @@
 'use client';
 
 import { useAppDispatch, useAppSelector } from '@store/store';
-import styles from './Search.module.css';
-import { searchActions } from './Search.store';
+import styles from './search.module.css';
+import { searchActions } from './search.store';
 import { debounce } from 'lodash';
 import { Mix, Mixes, Track } from '@directus/mix.model';
 import { ChangeEvent } from 'react';
@@ -18,7 +18,7 @@ type Result = {
   mix: Mix;
 }
 
-export default function Search({ mixes }: SearchProps) {
+export function Search({ mixes }: SearchProps) {
   const search = useAppSelector(state => state.search);
   const dispatch = useAppDispatch();
   const results = mixes.reduce((r, mix) => {

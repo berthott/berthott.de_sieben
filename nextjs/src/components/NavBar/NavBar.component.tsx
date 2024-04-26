@@ -12,9 +12,9 @@ import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mixes } from '@directus/mix.model';
-import { searchActions } from '@components/Search/Search.store';
 import { useBreakpoints } from '@utils/Breakpoints.hook';
 import Fade from '@utils/components/fade/fade.component';
+import { searchActions } from '@components/search/search.store';
 
 let lastScrollTop = 0;
 

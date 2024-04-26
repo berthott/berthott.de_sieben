@@ -1,6 +1,6 @@
 import { menuReducer } from '@components/Menu/Menu.store';
 import { playerReducer } from '@components/Player/Player.state';
-import { searchReducer } from '@components/Search/Search.store';
+import { searchReducer } from '@components/search/search.store';
 import { mixesReducer } from '@directus/mix.store';
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, useStore } from 'react-redux';
