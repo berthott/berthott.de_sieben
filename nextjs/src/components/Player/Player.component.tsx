@@ -89,12 +89,12 @@ export default function Player({ mixes }: PlayerProps) {
   useEffect(() => {
     if (audioInitialized && player.playAt) {
       setPlayPosition(stringToDuration(player.playAt));
-      if (!playing) {
+      if (!playing && mix && isCurrentSrc(assetsUrl(mix.audio))) {
         play();
       }
       dispatch(playerActions.resetPlayingState());
     }
-  }, [audioInitialized, play, player.playAt, dispatch, playing, stringToDuration, setPlayPosition]);
+  }, [audioInitialized, play, player.playAt, dispatch, playing, stringToDuration, setPlayPosition, mix, isCurrentSrc]);
 
   const getCurrentTrack = (): Track | null => {
     if (!mix || !mix.parsed_tracklist || !currentTime || !mix.parsed_tracklist[0].time) {
