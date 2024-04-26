@@ -1,4 +1,5 @@
 import styles from './picture-page.module.css';
+
 import Image from 'next/image';
 import { PropsWithChildren } from 'react';
 

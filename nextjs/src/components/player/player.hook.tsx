@@ -16,7 +16,7 @@ const stringToDuration = (s: string): number => {
   return hours * 3600 + minutes * 60 + seconds;
 }
 
-export default function usePlayer() {
+export function usePlayer() {
 
   const audio = useRef<HTMLAudioElement>();
   const playing = useRef(false);

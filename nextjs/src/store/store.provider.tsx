@@ -1,8 +1,8 @@
 'use client';
 
+import { makeStore, AppStore } from './store';
 import { PropsWithChildren, useRef } from 'react';
 import { Provider } from 'react-redux';
-import { makeStore, AppStore } from './store';
 import { mixesActions } from '@directus/mix.store';
 
 export const StoreProvider = ({ children }: PropsWithChildren) => {

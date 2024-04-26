@@ -1,4 +1,4 @@
-import { createDirectus, rest, readItems, readItem, SingletonCollections, utilitySort } from '@directus/sdk';
+import { createDirectus, rest, readItems } from '@directus/sdk';
 import { CustomDirectusTypes, DirectusFiles, Mixes as DirectusMixes, Global } from './directus';
 import { Mixes, initializeMixes } from './mix.model';
 

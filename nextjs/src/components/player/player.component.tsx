@@ -1,22 +1,24 @@
  'use client';
 
 import styles from './player.module.css';
+
 import { playerActions } from './player.store';
+import { usePlayer } from './player.hook';
+import { Mixes, Track, getMixByKey } from '@directus/mix.model';
+import { assetsUrl } from '@directus/directus.helpers';
+import { useBreakpoints } from '@utils/hooks/breakpoints.hook';
+import { useAppDispatch, useAppSelector } from '@store/store';
+
+import Image from 'next/image';
+import { useCallback, useEffect, useState } from 'react';
+import Fade from '@utils/components/fade/fade.component';
 import CloseIcon from '@mui/icons-material/Close';
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import Image from 'next/image';
-import { useAppDispatch, useAppSelector } from '@store/store';
-import { Mixes, Track, getMixByKey } from '@directus/mix.model';
-import { assetsUrl } from '@directus/directus.helpers';
-import { useCallback, useEffect, useState } from 'react';
-import usePlayer from './player.hook';
 import Slider from '@mui/material/Slider';
 import { Popover, useTheme } from '@mui/material';
-import { useBreakpoints } from '@utils/Breakpoints.hook';
-import Fade from '@utils/components/fade/fade.component';
 
 export type PlayerProps = {
   mixes: Mixes;

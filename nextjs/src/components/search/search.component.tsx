@@ -1,13 +1,15 @@
 'use client';
 
-import { useAppDispatch, useAppSelector } from '@store/store';
 import styles from './search.module.css';
+
 import { searchActions } from './search.store';
-import { debounce } from 'lodash';
-import { Mix, Mixes, Track } from '@directus/mix.model';
-import { ChangeEvent } from 'react';
-import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { playerActions } from '@components/player/player.store';
+import { Mix, Mixes, Track } from '@directus/mix.model';
+import { useAppDispatch, useAppSelector } from '@store/store';
+
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
+import { debounce } from 'lodash';
+import { ChangeEvent } from 'react';
 
 export type SearchProps = {
   mixes: Mixes;

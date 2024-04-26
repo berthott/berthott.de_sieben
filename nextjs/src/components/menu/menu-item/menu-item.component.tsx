@@ -1,9 +1,11 @@
 import styles from './menu-item.module.css';
-import Image from 'next/image';
+
 import { MenuStyle, menuActions } from '../menu.store';
-import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mix } from '@directus/mix.model';
 import { assetsUrl } from '@directus/directus.helpers';
+import { useAppDispatch, useAppSelector } from '@store/store';
+
+import Image from 'next/image';
 
 type MenuItemProps = {
   mix: Mix

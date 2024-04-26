@@ -1,20 +1,22 @@
 'use client';
 
 import styles from './nav-bar.module.css';
+
 import { Menu } from '@components/menu/menu.component';
 import { MenuStyle, menuActions } from '@components/menu/menu.store';
+import { searchActions } from '@components/search/search.store';
+import { Mixes } from '@directus/mix.model';
+import { useBreakpoints } from '@utils/hooks/breakpoints.hook';
+import Fade from '@utils/components/fade/fade.component';
+import { useAppDispatch, useAppSelector } from '@store/store';
+
+import { useEffect, useState } from 'react';
+import _ from 'lodash';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import WindowIcon from '@mui/icons-material/Window';
 import CloseIcon from '@mui/icons-material/Close';
-import { useEffect, useState } from 'react';
-import _ from 'lodash';
-import { useAppDispatch, useAppSelector } from '@store/store';
-import { Mixes } from '@directus/mix.model';
-import { useBreakpoints } from '@utils/Breakpoints.hook';
-import Fade from '@utils/components/fade/fade.component';
-import { searchActions } from '@components/search/search.store';
 
 let lastScrollTop = 0;
 

@@ -1,14 +1,16 @@
 'use client';
 
 import styles from './menu.module.css';
-import { useEffect, useRef, useState } from 'react';
-import { MenuItem } from './menu-item/menu-item.component';
-import { Rnd } from 'react-rnd';
+
 import { MenuStyle, menuActions } from './menu.store';
-import { Fade } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '@store/store';
+import { MenuItem } from './menu-item/menu-item.component';
 import { Mixes } from '@directus/mix.model';
-import { useBreakpoints } from '@utils/Breakpoints.hook';
+import { useAppDispatch, useAppSelector } from '@store/store';
+import { useBreakpoints } from '@utils/hooks/breakpoints.hook';
+
+import { useEffect, useRef, useState } from 'react';
+import { Rnd } from 'react-rnd';
+import { Fade } from '@mui/material';
 
 export type MenuProps = {
   mixes: Mixes;

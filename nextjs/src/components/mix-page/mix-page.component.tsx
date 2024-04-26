@@ -1,15 +1,17 @@
 'use client';
 
 import styles from './mix-page.module.css';
-import Image from 'next/image';
-import { PropsWithChildren } from 'react';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import DownloadIcon from '@mui/icons-material/Download';
-import { useAppDispatch } from '@store/store';
+
 import { playerActions } from '@components/player/player.store';
 import { Mix } from '@directus/mix.model';
 import { assetsUrl, downloadUrl } from '@directus/directus.helpers';
-import { useBreakpoints } from '@utils/Breakpoints.hook';
+import { useBreakpoints } from '@utils/hooks/breakpoints.hook';
+import { useAppDispatch } from '@store/store';
+
+import { PropsWithChildren } from 'react';
+import Image from 'next/image';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import DownloadIcon from '@mui/icons-material/Download';
 
 export type MixPageProps = PropsWithChildren<{
   mix: Mix;
