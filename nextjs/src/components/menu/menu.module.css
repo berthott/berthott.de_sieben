@@ -32,5 +32,6 @@
     flex
     flex-col
     divide-y-[2px]
+    overflow-y-auto
     bg-white;
 }

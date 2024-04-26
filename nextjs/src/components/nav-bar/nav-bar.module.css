@@ -4,7 +4,9 @@
     w-full
     h-full
     pointer-events-none
-    z-50;
+    z-50
+    flex
+    flex-col;
 }
 
 

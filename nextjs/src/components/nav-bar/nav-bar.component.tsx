@@ -63,7 +63,7 @@ export function NavBar(props: MenuProps) {
   const StyleIcon = menu.style === MenuStyle.Layer ? WindowIcon : AutoAwesomeMotionIcon;
   
   return (
-    <div className={styles.nav_container}>
+    <div className={`${styles.nav_container} ${!isMd && menu.show ? 'bg-white' : ''}`}>
       <nav 
           className={navStyle} 
           onMouseEnter={() => setTitleTwice(false)}
