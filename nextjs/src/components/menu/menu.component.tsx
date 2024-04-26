@@ -1,10 +1,10 @@
 'use client';
 
-import styles from '@components/Menu/Menu.module.css';
+import styles from './menu.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { MenuItem } from './MenuItem';
 import { Rnd } from 'react-rnd';
-import { MenuStyle, menuActions } from './Menu.store';
+import { MenuStyle, menuActions } from './menu.store';
 import { Fade } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mixes } from '@directus/mix.model';
@@ -14,7 +14,7 @@ export type MenuProps = {
   mixes: Mixes;
 };
 
-export default function Menu({ mixes }: MenuProps) {
+export function Menu({ mixes }: MenuProps) {
   const documentRef = useRef<Element | null>(null);
   const dispatch = useAppDispatch();
   useEffect(() => {

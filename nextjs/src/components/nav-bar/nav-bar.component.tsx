@@ -1,8 +1,8 @@
 'use client';
 
 import styles from './nav-bar.module.css';
-import { Menu } from '@components/Menu';
-import { MenuStyle, menuActions } from '@components/Menu/Menu.store';
+import { Menu } from '@components/menu/menu.component';
+import { MenuStyle, menuActions } from '@components/menu/menu.store';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';

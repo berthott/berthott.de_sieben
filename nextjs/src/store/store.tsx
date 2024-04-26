@@ -1,4 +1,4 @@
-import { menuReducer } from '@components/Menu/Menu.store';
+import { menuReducer } from '@components/menu/menu.store';
 import { playerReducer } from '@components/player/player.store';
 import { searchReducer } from '@components/search/search.store';
 import { mixesReducer } from '@directus/mix.store';
