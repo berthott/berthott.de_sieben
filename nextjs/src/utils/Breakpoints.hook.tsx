@@ -48,10 +48,10 @@ export function useBreakpoints() {
     if (typeof window !== "undefined") setIsClient(true);
   }, []);
 
-  if (isClient && breakpoints.isSm) breakpoints.active = "sm";
-  if (isClient && breakpoints.isMd) breakpoints.active = "md";
-  if (isClient && breakpoints.isLg) breakpoints.active = "lg";
-  if (isClient && breakpoints.isXl) breakpoints.active = "xl";
+  if (isClient && breakpoints.isSm) breakpoints.active = 'sm';
+  if (isClient && breakpoints.isMd) breakpoints.active = 'md';
+  if (isClient && breakpoints.isLg) breakpoints.active = 'lg';
+  if (isClient && breakpoints.isXl) breakpoints.active = 'xl';
 
   return breakpoints;
 }
