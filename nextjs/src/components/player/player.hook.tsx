@@ -22,6 +22,7 @@ export function usePlayer() {
   const playing = useRef(false);
   const [audioInitialized, setAudioInitialized] = useState(false);
   const [duration, setDuration] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [durationString, setDurationString] = useState('0:00:00');
   const [currentTime, setCurrentTime] = useState(0);
   const [currentTimeString, setCurrentTimeString] = useState('0:00:00');
@@ -73,9 +74,13 @@ export function usePlayer() {
         }
       }
       audio.current.onloadeddata = () => {
+        setLoading(false);
         if (audio.current && playing.current) {
           audio.current.play();
         }
+      }
+      audio.current.onloadstart = () => {
+        setLoading(true);
       }
       setAudioInitialized(true);
     } 
@@ -106,6 +111,7 @@ export function usePlayer() {
     currentTime,
     currentTimeString,
     playing: playing.current,
+    loading,
     isCurrentSrc,
     play,
     setVolume,

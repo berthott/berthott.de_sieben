@@ -17,6 +17,7 @@ import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import CircularProgress from '@mui/material/CircularProgress';
 import Slider from '@mui/material/Slider';
 import { Popover, useTheme } from '@mui/material';
 
@@ -68,6 +69,7 @@ export function Player({ mixes }: PlayerProps) {
     currentTime,
     currentTimeString,
     playing,
+    loading,
     isCurrentSrc,
     play,
     setVolume,
@@ -197,11 +199,15 @@ export function Player({ mixes }: PlayerProps) {
             <span className={styles.duration}>{durationString}</span>
           </div>
         </div>
-        <button onClick={() => play(!playing)}>
-          <Fade in={!playing} states={{
-            a: <PauseIcon style={{fontSize: largeIconSize}}/>,
-            b: <PlayArrowIcon style={{fontSize: largeIconSize}}/>,
-          }}/>
+        <button onClick={() => !loading && play(!playing)}>
+          <Fade 
+            in={!playing} 
+            states={{
+              a: <PauseIcon style={{fontSize: largeIconSize}}/>,
+              b: <PlayArrowIcon style={{fontSize: largeIconSize}}/>,
+            }}
+            loading={loading}
+            loadingComponent={<CircularProgress size={largeIconSize} color='inherit'/>}/>
         </button>
         {player.currentlyPlaying && <Image 
           className={styles.img} 

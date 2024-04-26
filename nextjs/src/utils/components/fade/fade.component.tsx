@@ -8,16 +8,21 @@ export interface FadeProps extends Partial<MuiFadeProps> {
     a: ReactElement;
     b: ReactElement;
   };
+  loading?: boolean;
+  loadingComponent?: ReactElement;
 };
 
-export default function Fade(props: FadeProps) {
+export default function Fade({ states, loadingComponent, loading = false, ...props}: FadeProps) {
   return (
     <div className={styles.fade}>
-      <MuiFade in={!props.in} appear={false}>
-        { props.states.a }
+      {loadingComponent && <MuiFade in={loading}>
+        { loadingComponent }
+      </MuiFade>}
+      <MuiFade in={!loading && !props.in} appear={false}>
+        { states.a }
       </MuiFade>
-      <MuiFade in={props.in}>
-        { props.states.b }
+      <MuiFade in={!loading && props.in}>
+        { states.b }
       </MuiFade>
     </div> 
   );
