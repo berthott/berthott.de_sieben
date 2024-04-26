@@ -4,7 +4,7 @@ import styles from '@components/Menu/Menu.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { MenuItem } from './MenuItem';
 import { Rnd } from 'react-rnd';
-import { MenuStyle, menuActions } from './Menu.state';
+import { MenuStyle, menuActions } from './Menu.store';
 import { Fade } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mixes } from '@directus/mix.model';

@@ -1,6 +1,6 @@
 import styles from '@components/Menu/MenuItem/MenuItem.module.css';
 import Image from 'next/image';
-import { MenuStyle, menuActions } from '../Menu.state';
+import { MenuStyle, menuActions } from '../Menu.store';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { Mix } from '@directus/mix.model';
 import { assetsUrl } from '@directus/directus.helpers';

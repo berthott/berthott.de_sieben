@@ -1,7 +1,7 @@
 'use client';
 
 import { Menu } from '@components/Menu';
-import { MenuStyle, menuActions } from '@components/Menu/Menu.state';
+import { MenuStyle, menuActions } from '@components/Menu/Menu.store';
 import styles from '@components/NavBar/NavBar.module.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
