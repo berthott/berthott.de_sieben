@@ -4,17 +4,36 @@
     bottom-0
     w-full
     z-40
-    h-24
-    flex
-    flex-row-reverse
-    items-center
-    pr-[36px]
-    gap-[18px]
-    bg-white
     overflow-hidden
     transition-all
     duration-500
     ease-out;
+}
+
+.player_main {
+  @apply
+    w-full
+    flex
+    flex-row-reverse
+    items-center
+    gap-[10px]
+    md:gap-[18px]
+    pr-[20px]
+    md:pr-[36px]
+    h-20
+    md:h-24
+    bg-white;
+}
+
+.player_top {
+  @apply
+    flex
+    flex-row-reverse
+    pr-[10px];
+  button {
+    @apply
+      bg-white;
+  }
 }
 
 .slide_out {
@@ -28,15 +47,20 @@
 
 .waveform {
   @apply
-    flex-grow
-    flex-col;
+    flex-1
+    flex-col
+    overflow-hidden;
 
-  .waveform_meta {
+  .title {
     @apply
-      flex
-      flex-row
-      items-center
-      gap-[10px];
+      w-full
+      max-w-full
+      text-nowrap;
+  }
+
+  .scroll {
+    @apply
+      animate-scrolling-text;
   }
 
   .duration {
@@ -44,10 +68,22 @@
       text-xs
       text-gray-500;
   }
+}
 
-  .currentTrack {
-    @apply
-      h-2
-      text-xs;
-  }
+.volume_popover {
+  @apply
+    shadow-none
+    rounded-none
+    h-[150px]
+    px-2
+    pt-5
+    pb-3;
+}
+
+.slider {
+  @apply
+    flex
+    flex-row
+    items-center
+    gap-[10px];
 }
