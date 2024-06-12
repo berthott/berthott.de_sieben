@@ -31,6 +31,7 @@ export function usePlayer() {
     playing.current = state;
     if (audio.current) {
       if (src && audio.current.currentSrc !== src) {
+        console.log('Setting new src');
         audio.current.src = src;
         audio.current.load();
       } else {
@@ -47,6 +48,7 @@ export function usePlayer() {
 
   const setPlayPosition = (position: number) => {
     if (audio.current) {
+      console.log('Setting play position');
       audio.current.currentTime = position;
     }
   }
@@ -59,16 +61,19 @@ export function usePlayer() {
   useEffect(() => {
 
     if (!audioInitialized) {
+      console.log('Initializing audio');
       audio.current = new Audio();
       audio.current.preload = 'metadata';
       audio.current.onloadedmetadata = () => {
         if (audio.current) {
+          console.log('Loaded metadata');
           setDuration(audio.current.duration);
           setDurationString(durationToString(audio.current.duration));
         }
       }
       audio.current.ontimeupdate = () => {
         if (audio.current) {
+          console.log('Time update');
           setCurrentTime(audio.current.currentTime);
           setCurrentTimeString(durationToString(audio.current.currentTime));
         }
@@ -76,6 +81,7 @@ export function usePlayer() {
       audio.current.onloadeddata = () => {
         setLoading(false);
         if (audio.current && playing.current) {
+          console.log('onloadeddata');
           audio.current.play();
         }
       }
