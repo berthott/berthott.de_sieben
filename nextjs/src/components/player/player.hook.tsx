@@ -40,7 +40,7 @@ export function usePlayer() {
         title: mix.title || undefined,
         artist: 'berthott',
         album: mix.release || undefined,
-        artwork: [96, 128, 192, 256, 384, 512].map(size =>
+        artwork: [512].map(size =>
           ({ 
             src: assetTransform(mix.image, {
               fit: 'cover', 
