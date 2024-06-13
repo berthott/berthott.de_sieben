@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { log } from '@utils/logger/logger';
 
 const context = 'player';
+const initialTime = '0:00:00';
 
 const durationToString = (duration: number): string => {
   const hours = Math.floor(duration / 3600);
@@ -26,9 +27,9 @@ export function usePlayer() {
   const [audioInitialized, setAudioInitialized] = useState(false);
   const [duration, setDuration] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [durationString, setDurationString] = useState('0:00:00');
+  const [durationString, setDurationString] = useState(initialTime);
   const [currentTime, setCurrentTime] = useState(0);
-  const [currentTimeString, setCurrentTimeString] = useState('0:00:00');
+  const [currentTimeString, setCurrentTimeString] = useState(initialTime);
 
   const play = (state: boolean = true, src?: string) => {
     playing.current = state;
@@ -90,6 +91,8 @@ export function usePlayer() {
       }
       audio.current.onloadstart = () => {
         setLoading(true);
+        setDurationString(initialTime);
+        setCurrentTimeString(initialTime);
       }
       setAudioInitialized(true);
     } 
