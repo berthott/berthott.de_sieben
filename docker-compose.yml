@@ -80,7 +80,7 @@ services:
     build:
       context: ./nextjs
       dockerfile: Dockerfile
-    restart: unless-stopped
+    restart: always
     volumes:
       - ./nextjs/src:/app/src
       - ./nextjs/public:/app/public
