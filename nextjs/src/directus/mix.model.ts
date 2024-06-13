@@ -41,7 +41,7 @@ function parseTracklist(tracklist: string): Tracklist {
   return tracks.map(line => {
     if (hasTime) {
       const [_, time, newLine] = line.split(/\[([0-9:]*?)\]/);
-      const [artist, title] = newLine.split(' - ');
+      const [artist, title] = newLine.trim().split(' - ');
       return title ? {title, artist, time} : {title: artist, artist, time};
     } 
     const [artist, title] = line.split(' - ');
