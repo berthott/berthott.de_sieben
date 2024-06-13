@@ -76,6 +76,7 @@ export function Player({ mixes }: PlayerProps) {
     setPlayPosition,
     durationToString,
     stringToDuration,
+    setMediaSession,
   } = usePlayer();
 
   if (audioSliderValue === currentTime) {
@@ -113,6 +114,10 @@ export function Player({ mixes }: PlayerProps) {
     return currentTrack || mix.parsed_tracklist?.[0];
   }
   const currentTrack = getCurrentTrack();
+  
+  if (mix && currentTrack) {
+    setMediaSession(mix, currentTrack);
+  }
 
   // scroll title if it's too long
   const [scrollDistance, setScrollDistance] = useState(0);

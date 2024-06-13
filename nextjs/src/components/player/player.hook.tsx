@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { log } from '@utils/logger/logger';
-import { Mix } from '@directus/mix.model';
+import { Mix, Track } from '@directus/mix.model';
 import { assetTransform, assetsUrl } from '@directus/directus.helpers';
 
 const context = 'player';
@@ -34,26 +34,32 @@ export function usePlayer() {
   const [currentTime, setCurrentTime] = useState(0);
   const [currentTimeString, setCurrentTimeString] = useState(initialTime);
 
-  const setMediaSession = (mix: Mix) => {
+  const setMediaSession = (mix: Mix, track?: Track) => {
     if ('mediaSession' in navigator) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: mix.title || undefined,
-        artist: 'berthott',
-        album: mix.release || undefined,
-        artwork: [512].map(size =>
-          ({ 
-            src: assetTransform(mix.image, {
-              fit: 'cover', 
-              format: 'png',
-              width: size.toString(),
-              height: size.toString(),
-            }),
-            sizes: `${size}x${size}`, 
-            type: 'image/png', 
-          })
-        ),
-      });
-      console.log('media session set', navigator.mediaSession.metadata);
+      const title = `${mix.title || undefined}${track ? ` - ${track.artist} - ${track.title}` : ''}`;
+      if (navigator.mediaSession.metadata) {
+        navigator.mediaSession.metadata.title = title;
+      }
+      else {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title,
+          artist: 'berthott',
+          album: mix.release || undefined,
+          artwork: [512].map(size =>
+            ({ 
+              src: assetTransform(mix.image, {
+                fit: 'cover', 
+                format: 'png',
+                width: size.toString(),
+                height: size.toString(),
+              }),
+              sizes: `${size}x${size}`, 
+              type: 'image/png', 
+            })
+          ),
+        });
+      }
+      log(context, 'Media Session set', navigator.mediaSession.metadata);
     }
   }
 
@@ -158,5 +164,6 @@ export function usePlayer() {
     setPlayPosition,
     durationToString,
     stringToDuration,
+    setMediaSession,
   }
 }
