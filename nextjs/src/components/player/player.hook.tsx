@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { log } from '@utils/logger/logger';
+import { Mix } from '@directus/mix.model';
+import { assetTransform, assetsUrl } from '@directus/directus.helpers';
 
 const context = 'player';
 const initialTime = '0:00:00';
@@ -25,19 +27,45 @@ export function usePlayer() {
   const audio = useRef<HTMLAudioElement>();
   const playing = useRef(false);
   const [audioInitialized, setAudioInitialized] = useState(false);
+  const [currentMix, setCurrentMix] = useState<Mix | undefined>();
   const [duration, setDuration] = useState(0);
   const [loading, setLoading] = useState(false);
   const [durationString, setDurationString] = useState(initialTime);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentTimeString, setCurrentTimeString] = useState(initialTime);
 
-  const play = (state: boolean = true, src?: string) => {
+  const setMediaSession = (mix: Mix) => {
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: mix.title || undefined,
+        artist: 'berthott',
+        album: mix.release || undefined,
+        artwork: [96, 128, 192, 256, 384, 512].map(size =>
+          ({ 
+            src: assetTransform(mix.image, {
+              fit: 'cover', 
+              format: 'png',
+              width: size.toString(),
+              height: size.toString(),
+            }),
+            sizes: `${size}x${size}`, 
+            type: 'image/png', 
+          })
+        ),
+      });
+      console.log('media session set', navigator.mediaSession.metadata);
+    }
+  }
+
+  const play = (state: boolean = true, mix?: Mix) => {
     playing.current = state;
     if (audio.current) {
-      if (src && audio.current.currentSrc !== src) {
+      if (mix && audio.current?.currentSrc !== assetsUrl(mix.audio)) {
         log(context, 'Setting new src');
-        audio.current.src = src;
+        audio.current.src = assetsUrl(mix.audio);
         audio.current.load();
+        setCurrentMix(mix);
+        setMediaSession(mix);
       } else {
         state ? audio.current.play() : audio.current.pause();
       }
@@ -57,8 +85,8 @@ export function usePlayer() {
     }
   }
 
-  const isCurrentSrc = (src: string) => {
-    return audio.current?.currentSrc === src;
+  const isCurrentMix = (mix: Mix) => {
+    return currentMix?.id === mix.id && audio.current?.currentSrc === assetsUrl(mix.audio);
   }
 
   // Initialize audio
@@ -124,7 +152,7 @@ export function usePlayer() {
     currentTimeString,
     playing: playing.current,
     loading,
-    isCurrentSrc,
+    isCurrentMix,
     play,
     setVolume,
     setPlayPosition,

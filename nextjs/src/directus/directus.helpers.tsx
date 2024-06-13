@@ -16,6 +16,15 @@ export function assetsUrl(path?: string | DirectusFiles | null): string {
   return `${apiUrl}/assets/${path}`;
 }
 
+export function assetTransform(path?: string | DirectusFiles | null, transform?: { [key: string]: string}): string {
+  path = assetsUrl(path);
+  if (transform) {
+    const transformString = Object.keys(transform).map(key => `${key}=${transform[key]}`).join('&');
+    path = `${path}?${transformString}`;
+  }
+  return path;
+}
+
 export function downloadUrl(path?: string | DirectusFiles | null): string {
   return `${assetsUrl(path)}?download`;
 }

@@ -70,7 +70,7 @@ export function Player({ mixes }: PlayerProps) {
     currentTimeString,
     playing,
     loading,
-    isCurrentSrc,
+    isCurrentMix,
     play,
     setVolume,
     setPlayPosition,
@@ -85,24 +85,23 @@ export function Player({ mixes }: PlayerProps) {
   // set new source when mix changes
   useEffect(() => {
     if (audioInitialized && mix) {
-      const src = assetsUrl(mix.audio);
-      if (!isCurrentSrc(src)) {
-        play(true, src);
+      if (!isCurrentMix(mix)) {
+        play(true, mix);
         dispatch(playerActions.resetPlayingState());
       }
     }
-  }, [audioInitialized, mix, play, isCurrentSrc, dispatch]);
+  }, [audioInitialized, mix, play, isCurrentMix, dispatch]);
 
   // play at specific position
   useEffect(() => {
     if (audioInitialized && player.playAt) {
       setPlayPosition(stringToDuration(player.playAt));
-      if (!playing && mix && isCurrentSrc(assetsUrl(mix.audio))) {
+      if (!playing && mix && isCurrentMix(mix)) {
         play();
       }
       dispatch(playerActions.resetPlayingState());
     }
-  }, [audioInitialized, play, player.playAt, dispatch, playing, stringToDuration, setPlayPosition, mix, isCurrentSrc]);
+  }, [audioInitialized, play, player.playAt, dispatch, playing, stringToDuration, setPlayPosition, mix, isCurrentMix]);
 
   // get the currently played track
   const getCurrentTrack = (): Track | null => {
