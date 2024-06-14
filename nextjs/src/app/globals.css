@@ -54,8 +54,7 @@ body {
     bottom-0
     right-0
     border-[10px]
-    border-b-[200px]
-    mb-[-190px]
+    outline-[200px]
     border-white
     pointer-events-none
     z-50;
