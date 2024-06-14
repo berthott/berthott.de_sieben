@@ -39,21 +39,24 @@ body {
   }
 }
 
+.container {
+  @apply
+    w-full
+    h-full;
+}
+
 .border {
   @apply 
-    fixed 
+    fixed
     bg-transparent
     top-0
     left-0
-    h-dvh
-    w-dvw
+    bottom-0
+    right-0
     border-[10px]
+    border-b-[200px]
+    mb-[-190px]
     border-white
     pointer-events-none
     z-50;
-
-  @supports (-webkit-touch-callout: none) {
-    height: 100vh;
-    max-height: -webkit-fill-available !important;
-  }
 }
