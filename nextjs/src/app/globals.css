@@ -51,4 +51,9 @@ body {
     border-white
     pointer-events-none
     z-50;
+
+  @supports (-webkit-touch-callout: none) {
+    height: 100vh;
+    max-height: -webkit-fill-available !important;
+  }
 }
