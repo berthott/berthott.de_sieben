@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
     "@reduxjs/toolkit": "^2.2.3",
+    "@sentry/nextjs": "^8.9.2",
     "@types/lodash": "^4.17.0",
     "lodash": "^4.17.21",
     "next": "14.1.3",
