@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: 'website',
       url,
-      title: mix ? `berthott - ${mix.title}, ${global.title}` : global.title || '',
+      title: mix ? `${global.title} - ${mix.title}` : global.title || '',
       description: mix ? `${mix.release}\n\n${mix.tracklist}` : global.description || '',
       images: [512].map(size =>
         ({ 
