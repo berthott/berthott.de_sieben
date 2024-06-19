@@ -1,6 +1,7 @@
 import { createDirectus, rest, readItems } from '@directus/sdk';
 import { CustomDirectusTypes, DirectusFiles, Mixes as DirectusMixes, Global } from './directus';
-import { Mixes, initializeMixes } from './mix.model';
+import { Mix, Mixes, initializeMixes } from './mix.model';
+import Fuse from 'fuse.js';
 
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL as string;
 const client = createDirectus<CustomDirectusTypes>(apiUrl).with(rest({
@@ -33,6 +34,7 @@ export class DirectusHelper {
 
   private main?: Promise<Global>;
   private mixes?: Promise<Mixes>;
+  private currentMix?: Promise<Mix | null>;
 
   private static _instance: DirectusHelper;
 
@@ -44,7 +46,6 @@ export class DirectusHelper {
     }
     return DirectusHelper._instance;
   }
-
 
   async loadMixes(): Promise<Mixes> {
     if (this.mixes) {
@@ -58,6 +59,18 @@ export class DirectusHelper {
     return this.mixes = result
       .then((mixes: DirectusMixes[]) => mixes.sort((a, b) => new Date(b.release!).getTime() - new Date(a.release!).getTime()))
       .then((mixes: DirectusMixes[]) => initializeMixes(mixes));
+  }
+
+  async getCurrentMix(search: string): Promise<Mix | null> {
+    if (this.currentMix) {
+      return this.currentMix;
+    }
+
+    return this.currentMix = this.loadMixes()
+      .then(mixes => {
+        const found = new Fuse(mixes, { keys: ['key'] }).search(search);
+        return found.length > 0 ? found[0].item : null;
+      });
   }
 
   async loadGlobal(): Promise<Global> {
