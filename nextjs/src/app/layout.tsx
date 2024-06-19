@@ -26,9 +26,9 @@ export async function generateMetadata(): Promise<Metadata> {
       url,
       title: mix ? `berthott - ${mix.title}, ${global.title}` : global.title || '',
       description: mix ? `${mix.release}\n\n${mix.tracklist}` : global.description || '',
-      ...( mix ? {images: [512].map(size =>
+      images: [512].map(size =>
         ({ 
-          url: assetTransform(mix.image, {
+          url: assetTransform(mix ? mix.image : global.cover_image, {
             fit: 'cover', 
             format: 'png',
             width: size.toString(),
@@ -36,9 +36,9 @@ export async function generateMetadata(): Promise<Metadata> {
           }),
           width: size,
           height: size, 
-          alt: mix.title || '', 
+          alt: (mix ? mix.title : global.title) || '', 
         })
-      ),} : {}),
+      ),
     },
   };
 
