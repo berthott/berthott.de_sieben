@@ -34,7 +34,6 @@ export class DirectusHelper {
 
   private main?: Promise<Global>;
   private mixes?: Promise<Mixes>;
-  private currentMix?: Promise<Mix | null>;
 
   private static _instance: DirectusHelper;
 
@@ -62,11 +61,7 @@ export class DirectusHelper {
   }
 
   async getCurrentMix(search: string): Promise<Mix | null> {
-    if (this.currentMix) {
-      return this.currentMix;
-    }
-
-    return this.currentMix = this.loadMixes()
+    return this.loadMixes()
       .then(mixes => {
         const found = new Fuse(mixes, { keys: ['key'] }).search(search);
         return found.length > 0 ? found[0].item : null;
