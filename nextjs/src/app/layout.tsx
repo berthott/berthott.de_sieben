@@ -17,6 +17,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const global = await DirectusHelper.instance().loadGlobal();
   const mix = await DirectusHelper.instance().getCurrentMix(pathname);
 
+  console.log('pathname', pathname);
+  headers().forEach((value, key) => console.log(`${key}: ${value}`));
 
   const metadata = {
     title: global.title,
