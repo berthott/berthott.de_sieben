@@ -5,7 +5,9 @@ export async function middleware(request: NextRequest) {
 
   // no infinite redirecting
   if (request.nextUrl.pathname === '/') {
-    return NextResponse.next();
+    const response = NextResponse.next();
+    response.cookies.delete('mix');
+    return response;
     }
   
   const mix = await DirectusHelper.instance().getCurrentMix(request.nextUrl.pathname);
