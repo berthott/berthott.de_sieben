@@ -68,6 +68,11 @@ export class DirectusHelper {
       });
   }
 
+  async getMixByKey(key: string): Promise<Mix | null> {
+    return this.loadMixes()
+      .then(mixes => mixes.find(mix => mix.key === key) || null);
+  }
+
   async loadGlobal(): Promise<Global> {
     if (this.main) {
       return this.main;

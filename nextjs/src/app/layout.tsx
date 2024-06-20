@@ -4,7 +4,7 @@ import './globals.css';
 import { StoreProvider } from '@store/store.provider';
 import { PropsWithChildren } from 'react';
 import { DirectusHelper, assetTransform } from '@directus/directus.helpers';
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 
 const font = Inter({ 
   subsets: ['latin'],
@@ -12,13 +12,10 @@ const font = Inter({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const pathname = headers().get('pathname') || '';
   const url = headers().get('referer') || '';
   const global = await DirectusHelper.instance().loadGlobal();
-  const mix = await DirectusHelper.instance().getCurrentMix(pathname);
-
-  console.log('pathname', pathname);
-  headers().forEach((value, key) => console.log(`${key}: ${value}`));
+  const mixKey = cookies().get('mix')?.value || '';
+  const mix = await DirectusHelper.instance().getMixByKey(mixKey);
 
   const metadata = {
     title: global.title,
