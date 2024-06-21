@@ -10,21 +10,25 @@
     text-white
     bg-black/80
     md:bg-black/60
-    grid
-    place-content-center
-    row-start-1;
-
-}
-  
-.container {
-  @apply
-    h-svh
-    pt-20
     px-4
     flex
     flex-col;
 }
 
+.top {
+  @apply 
+    w-full
+    flex
+    flex-row-reverse
+    items-center
+    gap-[10px]
+    md:gap-[18px]
+    h-20
+    md:h-24
+    text-white
+    flex-shrink-0;
+}
+  
 .input {
   @apply
     w-full
@@ -37,7 +41,8 @@
     text-white
     border-b-white
     border-b-[1px]
-    outline-none;
+    outline-none
+    flex-shrink-0;
 }
 
 .results {
