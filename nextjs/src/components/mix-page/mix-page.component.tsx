@@ -28,7 +28,12 @@ export function MixPage({mix}: MixPageProps) {
   const share = (mix: Mix) => {
     const baseUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || '';
     const url = `${baseUrl}/${mix.key}`;
-    if (navigator.share && isSm) {
+    const shareData: ShareData = {
+      title: mix.title || '',
+      text: `${mix.release}\n\n${mix.tracklist}`,
+      url,
+    };
+    if (navigator.canShare && navigator.canShare(shareData)) {
       const shareData: ShareData = {
         title: mix.title || '',
         text: `${mix.release}\n\n${mix.tracklist}`,
