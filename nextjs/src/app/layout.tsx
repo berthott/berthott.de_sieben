@@ -13,10 +13,11 @@ const font = Inter({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const url = headers().get('referer') || '';
   const global = await DirectusHelper.instance().loadGlobal();
   const mixKey = cookies().get('mix')?.value || '';
   const mix = await DirectusHelper.instance().getMixByKey(mixKey);
+  const baseUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || '';
+  const url = `${baseUrl}/${mix?.key}`;
 
   const metadata = {
     title: global.title,
