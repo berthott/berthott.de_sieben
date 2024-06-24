@@ -81,6 +81,8 @@ services:
       context: ./nextjs
       dockerfile: Dockerfile
     restart: always
+    depends_on:
+      - directus
     volumes:
       - ./nextjs/src:/app/src
       - ./nextjs/public:/app/public
