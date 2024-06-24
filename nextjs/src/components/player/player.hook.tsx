@@ -65,6 +65,7 @@ export function usePlayer() {
 
   const play = (state: boolean = true, mix?: Mix) => {
     playing.current = state;
+    log(context, 'Play function: playing.current', playing.current);
     if (audio.current) {
       if (mix && audio.current?.currentSrc !== assetsUrl(mix.audio)) {
         log(context, 'Setting new src');

@@ -6,6 +6,7 @@ import { playerActions } from './player.store';
 import { usePlayer } from './player.hook';
 import { Mixes, Track, getMixByKey } from '@directus/mix.model';
 import { assetsUrl } from '@directus/directus.helpers';
+import { log } from '@utils/logger/logger';
 import { useBreakpoints } from '@utils/hooks/breakpoints.hook';
 import { useAppDispatch, useAppSelector } from '@store/store';
 
@@ -20,6 +21,8 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import CircularProgress from '@mui/material/CircularProgress';
 import Slider from '@mui/material/Slider';
 import { Popover, useTheme } from '@mui/material';
+
+const context = 'player';
 
 export type PlayerProps = {
   mixes: Mixes;
@@ -78,6 +81,8 @@ export function Player({ mixes }: PlayerProps) {
     stringToDuration,
     setMediaSession,
   } = usePlayer();
+
+  log(context, 'Player component: playing', playing);
 
   if (audioSliderValue === currentTime) {
     setAudioSliderValue(null);
