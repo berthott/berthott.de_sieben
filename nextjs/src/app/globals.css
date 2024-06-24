@@ -54,11 +54,7 @@ body {
     bottom-0
     right-0
     border-[10px]
-    outline-[200px]
     border-white
     pointer-events-none
-    z-50
-    transition-all
-    duration-500
-    ease-out;
+    z-50;
 }
