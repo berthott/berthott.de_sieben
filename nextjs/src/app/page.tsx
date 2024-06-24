@@ -5,7 +5,6 @@ import { Player } from '@components/player/player.component';
 import { Router, RouterProps } from '@components/router/router.component';
 import { Search } from '@components/search/search.component';
 import { DirectusHelper, assetsUrl } from '@directus/directus.helpers';
-import Border from '@utils/components/border/border.component';
 
 export default async function Home({ currentMix }: RouterProps) {
   const mixes = await DirectusHelper.instance().loadMixes();
@@ -15,7 +14,7 @@ export default async function Home({ currentMix }: RouterProps) {
       <Router currentMix={currentMix}/>
       <NavBar mixes={mixes}/>
       <Search mixes={mixes}/>
-      <Border />
+      <div className="border"/>
       <div className="pages">
         <PicturePage src={assetsUrl(global.cover_image)} alt={global.title || ''} priority/>
         { mixes.map(mix => <MixPage mix={mix} key={mix.key}/>) }
