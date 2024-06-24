@@ -20,7 +20,7 @@ services:
   berthott:
     labels:
       - traefik.enable=true
-      - traefik.http.routers.berthott-sieben.rule=Host(`beta.berthott.de`)
+      - traefik.http.routers.berthott-sieben.rule=Host(`berthott.de`)
       - traefik.http.routers.berthott-sieben.tls=true
       - traefik.http.routers.berthott-sieben.tls.certresolver=lets-encrypt
       - traefik.http.services.berthott-sieben.loadbalancer.server.port=3000
