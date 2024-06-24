@@ -44,21 +44,3 @@ body {
     w-full
     h-full;
 }
-
-.border {
-  @apply 
-    fixed
-    bg-transparent
-    top-0
-    left-0
-    bottom-0
-    right-0
-    border-[10px]
-    outline-[200px]
-    border-white
-    pointer-events-none
-    z-50
-    transition-all
-    duration-500
-    ease-out;
-}
