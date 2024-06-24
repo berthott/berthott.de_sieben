@@ -73,6 +73,7 @@ export function usePlayer() {
         setCurrentMix(mix);
         setMediaSession(mix);
       } else {
+        log(context, 'Playing audio', state);
         state ? audio.current.play() : audio.current.pause();
       }
     };
