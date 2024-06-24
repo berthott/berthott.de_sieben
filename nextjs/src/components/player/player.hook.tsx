@@ -25,7 +25,8 @@ const stringToDuration = (s: string): number => {
 export function usePlayer() {
 
   const audio = useRef<HTMLAudioElement>();
-  const playing = useRef(false);
+  const _playing = useRef(false);
+  const [playing, setPlaying] = useState(false);
   const [audioInitialized, setAudioInitialized] = useState(false);
   const [currentMix, setCurrentMix] = useState<Mix | undefined>();
   const [duration, setDuration] = useState(0);
@@ -64,8 +65,8 @@ export function usePlayer() {
   }
 
   const play = (state: boolean = true, mix?: Mix) => {
-    playing.current = state;
-    log(context, 'Play function: playing.current', playing.current);
+    _playing.current = state;
+    log(context, 'Play function: _playing.current', _playing.current);
     if (audio.current) {
       if (mix && audio.current?.currentSrc !== assetsUrl(mix.audio)) {
         log(context, 'Setting new src');
@@ -74,7 +75,7 @@ export function usePlayer() {
         setCurrentMix(mix);
         setMediaSession(mix);
       } else {
-        log(context, 'Playing audio', state);
+        log(context, '_playing audio', state);
         state ? audio.current.play() : audio.current.pause();
       }
     };
@@ -120,8 +121,8 @@ export function usePlayer() {
       }
       audio.current.onloadeddata = () => {
         setLoading(false);
-        if (audio.current && playing.current) {
-          log(context, 'Data loaded: playing audio');
+        if (audio.current && _playing.current) {
+          log(context, 'Data loaded: _playing audio');
           audio.current.play();
         }
       }
@@ -129,6 +130,9 @@ export function usePlayer() {
         setLoading(true);
         setDurationString(initialTime);
         setCurrentTimeString(initialTime);
+      }
+      audio.current.onplay = audio.current.onpause = () => {
+        setPlaying(!audio.current?.paused || false);
       }
       setAudioInitialized(true);
     } 
@@ -144,7 +148,7 @@ export function usePlayer() {
 
       if (e.code === 'Space') {
         e.preventDefault();
-        play(!playing.current);
+        play(!_playing.current);
       }
     }
 
@@ -158,7 +162,7 @@ export function usePlayer() {
     durationString,
     currentTime,
     currentTimeString,
-    playing: playing.current,
+    playing: playing,
     loading,
     isCurrentMix,
     play,
