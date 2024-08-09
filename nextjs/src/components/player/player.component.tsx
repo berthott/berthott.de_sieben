@@ -26,9 +26,10 @@ const context = 'player';
 
 export type PlayerProps = {
   mixes: Mixes;
+  title: string;
 };
 
-export function Player({ mixes }: PlayerProps) {
+export function Player({ mixes, title }: PlayerProps) {
   const player = useAppSelector(state => state.player);
   const dispatch = useAppDispatch();
   const mix = getMixByKey(mixes, player.currentlyPlaying!);
@@ -131,6 +132,10 @@ export function Player({ mixes }: PlayerProps) {
       setScrollDistance(node.scrollWidth - node.clientWidth);
     }
   }, []);
+
+  useEffect(() => {
+      document.title = `${title}${playing ? ` - ${mix?.title || ''}${currentTrack ? ` - ${currentTrack.artist} - ${currentTrack.title}` : ''}` : ''}`;
+  }, [mix, currentTrack, playing, title]);
 
 
   const largeIconSize = isMd ? 60 : 40;

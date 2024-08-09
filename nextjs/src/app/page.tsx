@@ -19,7 +19,7 @@ export default async function Home({ currentMix }: RouterProps) {
         <PicturePage src={assetsUrl(global.cover_image)} alt={global.title || ''} priority/>
         { mixes.map(mix => <MixPage mix={mix} key={mix.key}/>) }
       </div>
-      <Player mixes={mixes}/>
+      <Player mixes={mixes} title={global.title || ''}/>
     </>
   );
 }
