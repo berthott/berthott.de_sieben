@@ -64,6 +64,13 @@
     border-white
     px-[10px];
 
+    .image {
+      @apply
+        object-cover
+        shrink-0
+        basis-[100px];
+    }
+
     .text_list {
       @apply
         p-2
